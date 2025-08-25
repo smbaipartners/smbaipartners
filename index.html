@@ -1,139 +1,311 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMB AI Partners | AI Automation & Loyalty Programs for Small Business</title>
+    <title>SMB AI Partners | Stop Juggling Tasks, Start Growing Your Business</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXHVL920VX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-QXHVL920VX');
+    </script>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Lato', sans-serif;
+            background-color: #F8F9FA;
+            color: #333333;
         }
-        .hero-gradient {
-            /* Image of a modern, clean office space representing professionalism and technology */
-            background: linear-gradient(90deg, rgba(15, 23, 42, 0.98) 0%, rgba(15, 23, 42, 0.9) 50%, rgba(15, 23, 42, 0.7) 100%), url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2084&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .primary-blue { color: #2A4B8D; }
+        .bg-primary-blue { background-color: #2A4B8D; }
+        .hover\:bg-primary-blue-dark:hover { background-color: #213B70; }
+        .border-primary-blue { border-color: #2A4B8D; }
+
+        /* Animation for scroll fade-in */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Text shadow for hero readability */
+        .hero-text-shadow {
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-200">
+<body>
 
-    <!-- Header -->
-    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <!-- Make sure your logo.jpg is in the same folder as this index.html file -->
-                <img src="logo.jpg" alt="SMB AI Partners Logo" class="h-12 w-auto rounded-md">
-                <span class="text-2xl font-bold text-white">SMB AI Partners</span>
+    <!-- Header / Navigation -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-3">
+                    <!-- This path works because 'logo.jpg' is in the same folder as index.html -->
+                    <img src="logo.jpg" alt="SMB AI Partners Logo" class="h-10 w-auto">
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#problem" class="text-gray-600 hover:text-primary-blue transition-colors">The Problem</a>
+                    <a href="#plan" class="text-gray-600 hover:text-primary-blue transition-colors">Our Plan</a>
+                    <a href="#solutions" class="text-gray-600 hover:text-primary-blue transition-colors">Solutions</a>
+                    <a href="#about" class="text-gray-600 hover:text-primary-blue transition-colors">About</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <a href="#contact" class="hidden md:inline-block bg-primary-blue text-white font-bold py-2 px-5 rounded-lg shadow-md hover:bg-primary-blue-dark transition-all transform hover:scale-105">
+                    Schedule a Call
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
             </div>
-            <div class="hidden md:flex items-center space-x-6">
-                <a href="#services" class="hover:text-sky-400 transition-colors">Services</a>
-                <a href="#about" class="hover:text-sky-400 transition-colors">About Us</a>
-                <a href="#contact" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">Get Started</a>
-            </div>
-            <button id="mobile-menu-button" class="md:hidden text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
-            </button>
-        </nav>
+        </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="#services" class="block py-2 hover:text-sky-400">Services</a>
-            <a href="#about" class="block py-2 hover:text-sky-400">About Us</a>
-            <a href="#contact" class="block mt-2 bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-lg">Get Started</a>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#problem" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">The Problem</a>
+            <a href="#plan" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">Our Plan</a>
+            <a href="#solutions" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">Solutions</a>
+            <a href="#about" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">About</a>
+            <div class="p-4">
+                <a href="#contact" class="block text-center bg-primary-blue text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-primary-blue-dark transition-colors">
+                    Schedule a Call
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <main class="container mx-auto px-6">
-        <section class="hero-gradient text-center py-20 md:py-32 rounded-2xl mt-8">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">Empowering Small Businesses to Compete and Win</h1>
-            <p class="mt-4 text-lg md:text-xl text-slate-300 max-w-3xl mx-auto">We turn complex AI and marketing tools into simple, revenue-driving solutions that help you grow.</p>
-            <a href="#contact" class="mt-8 inline-block bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform transform hover:scale-105">Schedule a Free Consultation</a>
-        </section>
-
-        <!-- Services Section -->
-        <section id="services" class="py-20">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-white">Our Solutions</h2>
-            <p class="text-center text-slate-400 mt-2 mb-12 max-w-2xl mx-auto">From 24/7 AI sales agents to loyalty programs that keep customers coming back, we have a solution for your business.</p>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- AI Automation Card -->
-                <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 transform hover:-translate-y-2 transition-transform flex flex-col">
-                    <h3 class="text-2xl font-bold text-sky-400">AI Automation</h3>
-                    <p class="mt-2 text-slate-300 flex-grow">Capture leads, qualify prospects, and automate scheduling with an always-on AI agent for contractors and service businesses.</p>
-                    <ul class="mt-4 space-y-2 text-slate-400">
-                        <li>✓ 24/7 Lead Capture & Follow-up</li>
-                        <li>✓ Automated Scheduling & Reminders</li>
-                        <li>✓ CRM & Invoice Automation</li>
-                    </ul>
-                </div>
-                <!-- Loyalty & SMS Marketing Card -->
-                <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 transform hover:-translate-y-2 transition-transform flex flex-col">
-                    <h3 class="text-2xl font-bold text-green-400">Loyalty & SMS Marketing</h3>
-                    <p class="mt-2 text-slate-300 flex-grow">Boost repeat business for restaurants, salons, and retail with simple, effective text-based loyalty programs.</p>
-                     <ul class="mt-4 space-y-2 text-slate-400">
-                        <li>✓ Increase Repeat Visits</li>
-                        <li>✓ Grow Customer Lists</li>
-                        <li>✓ Drive Sales with SMS Campaigns</li>
-                    </ul>
-                </div>
-                <!-- Pro & Custom Builds Card -->
-                <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 transform hover:-translate-y-2 transition-transform flex flex-col md:col-span-2 lg:col-span-1">
-                    <h3 class="text-2xl font-bold text-indigo-400">Advanced AI Solutions</h3>
-                    <p class="mt-2 text-slate-300 flex-grow">For larger operations needing sophisticated quoting copilots, knowledge bots, and data pipelines.</p>
-                    <ul class="mt-4 space-y-2 text-slate-400">
-                        <li>✓ Custom AI Agent Development</li>
-                        <li>✓ Multi-System Orchestration</li>
-                        <li>✓ Dedicated Support & SLAs</li>
-                    </ul>
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-[80vh] flex items-center text-white">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <!-- This path works because 'hero-image.png' is in the same folder as index.html -->
+            <img src="Gemini_Generated_Image_bbgo5fbbgo5fbbgo.jpeg" class="absolute inset-0 w-full h-full object-cover" alt="Two business professionals collaborating in a modern office">
+            <div class="relative container mx-auto px-6 text-left">
+                <div class="max-w-xl">
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight hero-text-shadow">Stop Juggling Tasks. Start Growing Your Business.</h1>
+                    <p class="mt-4 text-lg md:text-xl text-gray-200 hero-text-shadow">We help you automate the busywork and attract more repeat customers, so you can focus on what you do best.</p>
+                    <a href="#contact" class="mt-8 inline-block bg-primary-blue text-white font-bold text-lg py-4 px-10 rounded-lg shadow-xl hover:bg-primary-blue-dark transition-all transform hover:scale-105">
+                        Book My Free Strategy Call
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- About Us Section -->
-        <section id="about" class="py-20 bg-slate-800/50 rounded-2xl">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="pr-8">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Your Local Partner in a High-Tech World</h2>
-                    <p class="mt-4 text-slate-300">We're here to close the AI adoption gap for small businesses. While large corporations have entire teams dedicated to AI, we provide that expertise to you. Our mission is to make powerful technology accessible and affordable for local businesses in San Diego County and beyond.</p>
-                    <p class="mt-4 text-slate-300">We don't just sell tools; we partner with you, providing the education and hands-on support needed to see real results.</p>
+        <!-- Problem Section -->
+        <section id="problem" class="py-20 md:py-28 fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                    <div class="text-center md:text-left">
+                        <h2 class="text-3xl md:text-4xl font-bold primary-blue">Wearing Too Many Hats?</h2>
+                        <p class="mt-4 text-lg text-gray-600">You started your business to do what you love, not to get buried in paperwork, chase down leads, or figure out marketing. When you're stuck doing everything, the actual work of growing your business gets pushed aside.</p>
+                        <p class="mt-4 text-lg text-gray-600">You know technology could help, but who has the time to figure it all out? The options are overwhelming and often built for big corporations, not a local business like yours.</p>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04421cd6a8?q=80&w=1974&auto=format&fit=crop" class="rounded-lg shadow-2xl" alt="Stressed business owner at a cluttered desk">
+                    </div>
                 </div>
-                <!-- Image representing local business, e.g., a contractor or a storefront -->
-                <img src="https://images.unsplash.com/photo-1600880292203-942bb68b2432?q=80&w=1974&auto=format&fit=crop" class="rounded-xl shadow-2xl" alt="A small business owner collaborating with a consultant">
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-20 text-center">
-             <!-- Abstract tech background image -->
-            <div class="p-12 rounded-2xl" style="background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726a?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center;">
-                <h2 class="text-3xl md:text-4xl font-bold text-white">Ready to Grow Your Business?</h2>
-                <p class="mt-4 text-lg text-slate-300 max-w-2xl mx-auto">Let's talk about how AI and loyalty marketing can help you achieve your goals. Schedule a free, no-obligation consultation today.</p>
-                <a href="mailto:Kevin@smbaipartners.com" class="mt-8 inline-block bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform transform hover:scale-105">Email Us: Kevin@smbaipartners.com</a>
+        <!-- 3-Step Plan Section -->
+        <section id="plan" class="py-20 md:py-28 bg-white fade-in-section">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold primary-blue">Your 3-Step Plan to Automated Growth</h2>
+                <p class="mt-4 text-lg max-w-2xl mx-auto text-gray-600">We make it simple. Here’s how we help you get back to building your business.</p>
+                <div class="grid md:grid-cols-3 gap-10 mt-16">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center">
+                        <div class="bg-primary-blue text-white rounded-full p-5 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">1. Schedule a Call</h3>
+                        <p class="text-gray-600">Book a free, no-pressure strategy call. We'll listen to your goals and identify the biggest opportunities for automation and growth in your business.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center">
+                        <div class="bg-primary-blue text-white rounded-full p-5 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 16.382V5.618a1 1 0 00-1.447-.894L15 7m-6 13v-3m6 3v-3m0-10V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v3m10 0v-3" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">2. Get a Custom Plan</h3>
+                        <p class="text-gray-600">We'll design a straightforward AI and marketing automation plan tailored to your specific needs—no confusing jargon, just clear results.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center">
+                        <div class="bg-primary-blue text-white rounded-full p-5 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">3. Launch & Grow</h3>
+                        <p class="text-gray-600">We handle the entire setup. You get to enjoy more leads, happier customers, and more time back in your day.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions Section -->
+        <section id="solutions" class="py-20 md:py-28 fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold primary-blue">AI Solutions That Work For You</h2>
+                    <p class="mt-4 text-lg max-w-3xl mx-auto text-gray-600">We turn complex technology into simple tools that get you real-world results, whether you're a contractor on a job site or a restaurant owner serving customers.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <!-- Solution 1: AI Automation -->
+                    <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-200">
+                        <h3 class="text-2xl font-bold">For Contractors & Service Businesses</h3>
+                        <p class="mt-2 text-gray-600">Get a 24/7 AI Sales Agent that never sleeps.</p>
+                        <div class="my-6 p-6 bg-gray-100 rounded-lg">
+                            <div class="font-mono text-sm">
+                                <p><span class="font-bold text-green-600">AI Bot:</span> Hi! Thanks for contacting Patriot Plumbing. Are you looking for a quote for a new project?</p>
+                                <p class="mt-2"><span class="font-bold text-blue-600">Customer:</span> Yes, I need a new water heater installed.</p>
+                                <p class="mt-2"><span class="font-bold text-green-600">AI Bot:</span> Great! I can help with that. To get you an accurate quote, I just need a few details. Are you available for a quick 5-minute call tomorrow at 10 AM?</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="flex items-start"><span class="text-primary-blue font-bold mr-2">✓</span><span>Instantly capture and qualify every lead from your website or phone.</span></li>
+                            <li class="flex items-start"><span class="text-primary-blue font-bold mr-2">✓</span><span>Automatically schedule estimates and follow up with potential clients.</span></li>
+                            <li class="flex items-start"><span class="text-primary-blue font-bold mr-2">✓</span><span>Save hours every week on administrative work and focus on your jobs.</span></li>
+                        </ul>
+                    </div>
+                    <!-- Solution 2: Loyalty & SMS Marketing -->
+                    <div class="bg-white p-8 rounded-lg shadow-xl border border-gray-200">
+                        <h3 class="text-2xl font-bold">For Restaurants & Retail Shops</h3>
+                        <p class="mt-2 text-gray-600">Turn first-time visitors into loyal regulars.</p>
+                         <div class="my-6 p-6 bg-gray-100 rounded-lg">
+                            <div class="space-y-3">
+                                <p class="font-mono text-sm font-bold">Loyalty Dashboard</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-600">New Members (This Month)</span>
+                                    <span class="font-bold text-green-600 text-xl">127</span>
+                                </div>
+                                <div class="w-full bg-gray-300 rounded-full h-2.5"><div class="bg-green-500 h-2.5 rounded-full" style="width: 75%"></div></div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-600">Repeat Visits</span>
+                                    <span class="font-bold text-primary-blue text-xl">+28%</span>
+                                </div>
+                                <div class="w-full bg-gray-300 rounded-full h-2.5"><div class="bg-primary-blue h-2.5 rounded-full" style="width: 60%"></div></div>
+                            </div>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="flex items-start"><span class="text-primary-blue font-bold mr-2">✓</span><span>Launch a simple text-based loyalty program that customers love.</span></li>
+                            <li class="flex items-start"><span class="text-primary-blue font-bold mr-2">✓</span><span>Bring customers back with automated birthday rewards and special offers.</span></li>
+                            <li class="flex items-start"><span class="text-primary-blue font-bold mr-2">✓</span><span>See a direct increase in repeat business and average ticket size.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section id="testimonial" class="py-20 md:py-28 bg-white fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-3 gap-10 items-center">
+                    <div class="md:col-span-1 flex justify-center">
+                        <!-- This path works because 'troy.jpeg' is in the same folder as index.html -->
+                        <img src="troy.jpeg" alt="Headshot of Troy France, Owner of SoCoast Contracting" class="rounded-full shadow-2xl w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-primary-blue">
+                    </div>
+                    <div class="md:col-span-2">
+                        <p class="text-2xl italic text-gray-700">“Our biggest challenge was the feast or famine project flow. After meeting with SMB AI Partners, I was astounded by the simplicity of the tools. I couldn't believe that a tool could take something I would work on for an entire day and get it done within an hour!”</p>
+                        <cite class="mt-6 block font-bold text-lg not-italic">– Troy France, Owner, SoCoast Contracting</cite>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Kevin Section -->
+        <section id="about" class="py-20 md:py-28 fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                    <div class="flex justify-center">
+                        <!-- This path works because 'IMG_0011.jpg' is in the same folder as index.html -->
+                        <img src="IMG_0011.jpg" alt="Kevin Graham, Founder of SMB AI Partners" class="rounded-full shadow-2xl w-64 h-64 md:w-80 md:h-80 object-cover">
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h2 class="text-3xl md:text-4xl font-bold primary-blue">Your Partner in Growth</h2>
+                        <p class="mt-4 text-lg text-gray-600">Hi, I'm Kevin Graham. I started SMB AI Partners because I saw too many local business owners struggling to keep up. The technology that big companies use to get ahead should be available to everyone.</p>
+                        <p class="mt-4 text-lg text-gray-600">My mission is simple: to be your go-to, local expert who translates complex tech into real-world results. I'm not just a vendor; I'm a partner invested in your success.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section id="contact" class="bg-white py-20 md:py-28 fade-in-section">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold primary-blue">Ready to See How AI Can Grow Your Business?</h2>
+                <p class="mt-4 text-lg max-w-2xl mx-auto text-gray-600">Let's find the hidden opportunities in your business. A 15-minute chat is all it takes to see how automation can save you time and make you more money. No cost, no obligation.</p>
+                <a href="#" class="mt-8 inline-block bg-primary-blue text-white font-bold text-xl py-4 px-12 rounded-lg shadow-xl hover:bg-primary-blue-dark transition-all transform hover:scale-105">
+                    Book My Free Strategy Call
+                </a>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-800 border-t border-slate-700 mt-12">
-        <div class="container mx-auto px-6 py-6 text-center text-slate-400">
-            <p>&copy; 2025 SMB AI Partners. All rights reserved.</p>
-            <p class="text-sm mt-1">Empowering local businesses in San Diego and beyond.</p>
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <p>&copy; 2025 SMB AI Partners. All Rights Reserved.</p>
+            <p class="text-sm mt-2">Serving San Diego County and Beyond</p>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
+        // Mobile Menu Toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Scroll Fade-in Animation
+        const sections = document.querySelectorAll('.fade-in-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
         });
     </script>
 
 </body>
 </html>
+
