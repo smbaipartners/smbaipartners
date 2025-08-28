@@ -15,15 +15,16 @@
     <meta property="og:image" content="logo.png">
     <meta property="og:url" content="https://www.smbaipartners.com">
 
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QXHVL920VX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-QXHVL920VX');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXHVL920VX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-QXHVL920VX');
+    </script>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -72,16 +73,15 @@
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
                 <!-- Logo -->
-                <a href="#" class="flex items-center space-x-3">
-                    <!-- Increased logo size from h-12 to h-16 -->
+                <a href="index.html" class="flex items-center space-x-3">
                     <img src="logo.png" alt="SMB AI Partners Logo" class="h-16 w-auto">
                 </a>
 
                 <!-- Desktop Navigation -->
                 <nav class="hidden md:flex items-center space-x-8">
                     <a href="#problem" class="text-gray-600 hover:text-primary-blue transition-colors">The Problem</a>
-                    <a href="#plan" class="text-gray-600 hover:text-primary-blue transition-colors">Our Plan</a>
                     <a href="#solutions" class="text-gray-600 hover:text-primary-blue transition-colors">Solutions</a>
+                    <a href="blog.html" class="text-gray-600 hover:text-primary-blue transition-colors">Blog</a>
                     <a href="#about" class="text-gray-600 hover:text-primary-blue transition-colors">About</a>
                 </nav>
 
@@ -99,8 +99,8 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden">
             <a href="#problem" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">The Problem</a>
-            <a href="#plan" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">Our Plan</a>
             <a href="#solutions" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">Solutions</a>
+             <a href="blog.html" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">Blog</a>
             <a href="#about" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">About</a>
             <div class="p-4">
                 <a href="#contact" class="block text-center bg-primary-blue text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-primary-blue-dark transition-colors">
@@ -114,7 +114,6 @@
         <!-- Hero Section -->
         <section class="relative min-h-[80vh] flex items-center text-white">
             <div class="absolute inset-0 bg-black opacity-50"></div>
-            <!-- This path works because 'Gemini_Generated_Image_bbgo5fbbgo5fbbgo.jpeg' is in the same folder as index.html -->
             <img src="Gemini_Generated_Image_bbgo5fbbgo5fbbgo.jpeg" class="absolute inset-0 w-full h-full object-cover" alt="Two business professionals collaborating in a modern office">
             <div class="relative container mx-auto px-6 text-left">
                 <div class="max-w-xl">
@@ -137,7 +136,6 @@
                         <p class="mt-4 text-lg text-gray-600">You know technology could help, but who has the time to figure it all out? The options are overwhelming and often built for big corporations, not a local business like yours.</p>
                     </div>
                     <div>
-                        <!-- New image for the stressed business owner -->
                         <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop" class="rounded-lg shadow-2xl" alt="Stressed business owner working late at a desk">
                     </div>
                 </div>
@@ -178,7 +176,7 @@
             </div>
         </section>
 
-        <!-- NEW Solutions Section -->
+        <!-- Solutions Section -->
         <section id="solutions" class="py-20 md:py-28 bg-gray-800 text-white fade-in-section">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
@@ -225,7 +223,6 @@
             <div class="container mx-auto px-6">
                 <div class="grid md:grid-cols-3 gap-10 items-center">
                     <div class="md:col-span-1 flex justify-center">
-                        <!-- This path works because 'troy.jpeg' is in the same folder as index.html -->
                         <img src="troy.jpeg" alt="Headshot of Troy France, Owner of SoCoast Contracting" class="rounded-full shadow-2xl w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-primary-blue">
                     </div>
                     <div class="md:col-span-2">
@@ -241,7 +238,6 @@
             <div class="container mx-auto px-6">
                 <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
                     <div class="flex justify-center">
-                        <!-- This path works because 'IMG_0011.jpeg' is in the same folder as index.html -->
                         <img src="IMG_0011.jpeg" alt="Kevin Graham, Founder of SMB AI Partners" class="rounded-full shadow-2xl w-64 h-64 md:w-80 md:h-80 object-cover">
                     </div>
                     <div class="text-center md:text-left">
@@ -252,8 +248,27 @@
                 </div>
             </div>
         </section>
+        
+        <!-- From the Blog Section -->
+        <section id="blog-feature" class="py-20 md:py-28 bg-white fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold primary-blue">From the Blog</h2>
+                </div>
+                <div class="max-w-2xl mx-auto bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                    <a href="stop-chasing-leads.html" class="block hover:opacity-90 transition">
+                        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop" alt="Contractor working on a laptop at a construction site">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold primary-blue">Stop Chasing Leads After Work. Get an AI That Wins You Bids.</h3>
+                            <p class="mt-2 text-gray-600">The 6 PM scramble is a frustrating, inefficient cycle that eats into your personal time and costs you business. But what if you could end that cycle for good?</p>
+                            <span class="mt-4 inline-block font-bold text-primary-blue">Read More &rarr;</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-        <!-- NEW Calendly CTA Section -->
+        <!-- Calendly CTA Section -->
         <section id="contact" class="py-20 md:py-28 bg-gray-50 fade-in-section">
             <div class="container mx-auto px-6">
                 <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl grid md:grid-cols-2 gap-12 items-center">
