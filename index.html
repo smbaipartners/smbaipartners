@@ -17,13 +17,13 @@
 
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXHVL920VX"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXHVL92VX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
     
-      gtag('config', 'G-QXHVL920VX');
+      gtag('config', 'G-QXHVL92VX');
     </script>
 
     <!-- Tailwind CSS -->
@@ -77,7 +77,7 @@
                 </a>
                 <nav class="hidden md:flex items-center space-x-8">
                     <a href="#solutions" class="text-gray-600 hover:text-primary-blue">Solutions</a>
-                    <a href="Create PDF Aloud Tool.html" class="text-primary-blue font-bold">PDF Aloud Tool</a>
+                    <a href="PDF Aloud Tool.html" class="text-primary-blue font-bold">PDF Aloud Tool</a>
                     <a href="blog.html" class="text-gray-600 hover:text-primary-blue">Blog</a>
                     <a href="#about" class="text-gray-600 hover:text-primary-blue">About</a>
                 </nav>
@@ -114,7 +114,7 @@
                         <p class="mt-4 text-lg text-gray-600">You know technology could help, but who has the time to figure it all out? The options are overwhelming and often built for big corporations, not a local business like yours.</p>
                     </div>
                     <div>
-                        <img src="stressed.png" class="rounded-lg shadow-2xl" alt="Stressed business owner looking at a computer screen">
+                        <img src="Stressed.jpeg" class="rounded-lg shadow-2xl" alt="Stressed business owner looking at a computer screen">
                     </div>
                 </div>
             </div>
@@ -176,7 +176,7 @@
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-3xl md:text-4xl font-bold primary-blue">Try Our Free Tool</h2>
                 <p class="mt-4 text-lg max-w-2xl mx-auto text-gray-600">We built PDF Aloud to show the power of AI. Upload any PDF and listen to it in a natural, human-like voice. It's free, and a perfect example of how we build simple tools that solve real problems.</p>
-                <a href="Create PDF Aloud Tool.html" class="mt-8 inline-block bg-primary-blue text-white font-bold text-lg py-4 px-10 rounded-lg shadow-xl hover:bg-primary-blue-dark transition-all transform hover:scale-105">
+                <a href="PDF Aloud Tool.html" class="mt-8 inline-block bg-primary-blue text-white font-bold text-lg py-4 px-10 rounded-lg shadow-xl hover:bg-primary-blue-dark transition-all transform hover:scale-105">
                     Launch PDF Aloud
                 </a>
             </div>
@@ -204,7 +204,7 @@
             <div class="container mx-auto px-6">
                 <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
                      <div class="order-2 md:order-1">
-                        <img src="kevin.png" alt="Headshot of Kevin Graham" class="rounded-lg shadow-2xl">
+                        <img src="Kevin.png" alt="Headshot of Kevin Graham" class="rounded-lg shadow-2xl">
                     </div>
                     <div class="order-1 md:order-2 text-center md:text-left">
                         <h2 class="text-3xl md:text-4xl font-bold primary-blue">Your Partner in Growth</h2>
@@ -266,9 +266,13 @@
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                if (mobileMenu) {
+                    mobileMenu.classList.toggle('hidden');
+                }
+            });
+        }
 
         // Fade-in on scroll
         const sections = document.querySelectorAll('.fade-in-section');
