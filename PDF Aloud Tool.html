@@ -60,12 +60,6 @@
             width: 20px; height: 20px; background: #2563EB; cursor: pointer;
             border-radius: 50%; border: none;
         }
-        /* Style for disabled buttons */
-        .disabled-button {
-            cursor: not-allowed;
-            background-color: #9ca3af; /* gray-400 */
-            opacity: 0.7;
-        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -103,7 +97,7 @@
                 <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center space-y-4">
                     <div>
                         <input type="file" id="pdf-file-input" class="hidden" accept=".pdf">
-                        <label for="pdf-file-input" id="file-upload-button" class="bg-primary-blue text-white font-semibold py-2 px-4 rounded-lg hover:bg-primary-blue-dark transition-colors duration-300 disabled-button">
+                        <label for="pdf-file-input" id="file-upload-button" class="bg-primary-blue text-white font-semibold py-2 px-4 rounded-lg hover:bg-primary-blue-dark transition-colors duration-300">
                             <i class="fas fa-file-pdf mr-2"></i> Choose a New PDF
                         </label>
                         <p id="file-name" class="mt-3 text-sm text-gray-500">Connecting to cloud library...</p>
@@ -111,7 +105,7 @@
                      <!-- Library Section -->
                     <div class="pt-2">
                         <label for="library-select" class="block mb-2 text-sm font-medium text-gray-900">Or Select from Your Cloud Library:</label>
-                        <select id="library-select" disabled class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <select id="library-select" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option value="">Loading Library...</option>
                         </select>
                     </div>
@@ -202,7 +196,6 @@
         const tocContainer = document.getElementById('toc-container');
         const tocSelect = document.getElementById('toc-select');
 
-        // ... (rest of state variables remain the same) ...
         let currentPDFId = '';
         let fullText = '';
         let textChunks = [];
@@ -225,7 +218,6 @@
         let libraryUnsubscribe = null;
 
         function populateVoiceList() {
-            // ... (this function remains the same) ...
             voices = speechSynthesis.getVoices();
             voiceSelect.innerHTML = '';
             const geminiOption = document.createElement('option');
@@ -265,13 +257,7 @@
                     if (user) {
                         userId = user.uid;
                         console.log("Authenticated with user ID:", userId);
-                        // Enable UI elements now that we are authenticated
-                        fileUploadButton.classList.remove('disabled-button');
-                        librarySelect.disabled = false;
-                        librarySelect.classList.remove('bg-gray-200');
-                        librarySelect.classList.add('bg-gray-50');
                         fileNameDisplay.textContent = 'No file selected.';
-
                         populateLibraryDropdown();
                     } else {
                         fileNameDisplay.textContent = 'Authentication failed. Library disabled.';
@@ -291,10 +277,6 @@
             }
         }
         
-        // ... (The rest of your JavaScript functions remain the same) ...
-        // populateLibraryDropdown, savePdfToLibrary, updateLibraryPosition, 
-        // handleLibrarySelect, handleFileSelect, extractTextFromPdf, etc.
-        // No changes are needed in the core logic, only in the UI enabling/disabling.
         function populateLibraryDropdown() {
             if (!userId) {
                 librarySelect.innerHTML = '<option value="">Login required for library</option>';
@@ -347,6 +329,11 @@
         }
 
        async function handleLibrarySelect(event) {
+            if (!userId) {
+                updateStatus('Still connecting to the cloud library, please try again in a second.', 'loading');
+                event.target.value = ''; // Reset selection
+                return;
+            }
             const docId = event.target.value;
             if (!docId) return;
             handleStop();
@@ -378,11 +365,13 @@
         }
 
         async function handleFileSelect(event) {
-            const file = event.target.files[0];
-            if (!file || !userId) {
-                if (!userId) updateStatus('Please wait for library to connect before uploading.', 'error');
+            if (!userId) {
+                updateStatus('Still connecting to the cloud library, please try again in a second.', 'loading');
+                event.target.value = ''; // Clear the selected file
                 return;
             }
+            const file = event.target.files[0];
+            if (!file) return;
             
             librarySelect.value = ''; 
             fileNameDisplay.textContent = `New file: ${file.name}`;
@@ -865,3 +854,4 @@
     </script>
 </body>
 </html>
+
