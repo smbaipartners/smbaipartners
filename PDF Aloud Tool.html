@@ -33,7 +33,7 @@
         .bg-primary-blue { background-color: #2A4B8D; }
         .hover\:bg-primary-blue-dark:hover { background-color: #213B70; }
 
-        /* App-specific styles from your original file */
+        /* App-specific styles */
         #file-upload-button { cursor: pointer; }
         #text-content { cursor: default; }
         #text-content > span {
@@ -60,6 +60,12 @@
             width: 20px; height: 20px; background: #2563EB; cursor: pointer;
             border-radius: 50%; border: none;
         }
+        /* Style for disabled buttons */
+        .disabled-button {
+            cursor: not-allowed;
+            background-color: #9ca3af; /* gray-400 */
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -73,7 +79,7 @@
                 </a>
                 <nav class="hidden md:flex items-center space-x-8">
                     <a href="index.html#solutions" class="text-gray-600 hover:text-primary-blue">Solutions</a>
-                    <a href="pdf-aloud.html" class="text-primary-blue font-bold">PDF Aloud Tool</a>
+                    <a href="PDF Aloud Tool.html" class="text-primary-blue font-bold">PDF Aloud Tool</a>
                     <a href="blog.html" class="text-gray-600 hover:text-primary-blue">Blog</a>
                     <a href="index.html#about" class="text-gray-600 hover:text-primary-blue">About</a>
                 </nav>
@@ -92,21 +98,20 @@
                 <p class="text-gray-500 mt-1">Your personal, cloud-synced PDF reader.</p>
             </header>
             
-            <!-- This is where your app's original main content goes -->
             <div>
                 <!-- File Upload Section -->
                 <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center space-y-4">
                     <div>
                         <input type="file" id="pdf-file-input" class="hidden" accept=".pdf">
-                        <label for="pdf-file-input" id="file-upload-button" class="bg-primary-blue text-white font-semibold py-2 px-4 rounded-lg hover:bg-primary-blue-dark transition-colors duration-300 cursor-pointer">
+                        <label for="pdf-file-input" id="file-upload-button" class="bg-primary-blue text-white font-semibold py-2 px-4 rounded-lg hover:bg-primary-blue-dark transition-colors duration-300 disabled-button">
                             <i class="fas fa-file-pdf mr-2"></i> Choose a New PDF
                         </label>
-                        <p id="file-name" class="mt-3 text-sm text-gray-500">No file selected.</p>
+                        <p id="file-name" class="mt-3 text-sm text-gray-500">Connecting to cloud library...</p>
                     </div>
                      <!-- Library Section -->
                     <div class="pt-2">
                         <label for="library-select" class="block mb-2 text-sm font-medium text-gray-900">Or Select from Your Cloud Library:</label>
-                        <select id="library-select" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <select id="library-select" disabled class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option value="">Loading Library...</option>
                         </select>
                     </div>
@@ -175,8 +180,6 @@
 
     <!-- Your App's JavaScript -->
     <script type="module">
-        // Paste the entire <script type="module"> content from your original 'pdf aloud.html' file here
-        // No changes are needed to the JavaScript itself.
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, collection, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
@@ -184,6 +187,7 @@
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
 
         const fileInput = document.getElementById('pdf-file-input');
+        const fileUploadButton = document.getElementById('file-upload-button');
         const fileNameDisplay = document.getElementById('file-name');
         const librarySelect = document.getElementById('library-select');
         const controlsSection = document.getElementById('controls-section');
@@ -198,6 +202,7 @@
         const tocContainer = document.getElementById('toc-container');
         const tocSelect = document.getElementById('toc-select');
 
+        // ... (rest of state variables remain the same) ...
         let currentPDFId = '';
         let fullText = '';
         let textChunks = [];
@@ -216,30 +221,26 @@
         let pendingFetchIndexes = new Set();
         let playbackSessionId = null;
         let currentWordHighlightSpan = null;
-
         let db, auth, userId, appId;
         let libraryUnsubscribe = null;
 
         function populateVoiceList() {
+            // ... (this function remains the same) ...
             voices = speechSynthesis.getVoices();
             voiceSelect.innerHTML = '';
-            
             const geminiOption = document.createElement('option');
             geminiOption.textContent = '✨ Gemini Voice (Natural)';
             geminiOption.setAttribute('data-name', 'Gemini');
             voiceSelect.appendChild(geminiOption);
-
             if (voices.length === 0 && voiceSelect.options.length === 1) {
                  voiceSelect.innerHTML += '<option>No local voices available</option>';
             }
-
             voices.forEach((voice) => {
                 const option = document.createElement('option');
                 option.textContent = `${voice.name} (${voice.lang})`;
                 option.setAttribute('data-name', voice.name);
                 voiceSelect.appendChild(option);
             });
-            
             handleVoiceChange();
         }
         
@@ -252,7 +253,7 @@
                 appId = typeof __app_id !== 'undefined' ? __app_id : 'default-pdf-aloud';
                 if (typeof __firebase_config === 'undefined') {
                     updateStatus('Firebase not configured. Library is disabled.', 'error');
-                    console.error("Firebase config is missing.");
+                    fileNameDisplay.textContent = 'Cloud library disabled.';
                     return;
                 }
                 const firebaseConfig = JSON.parse(__firebase_config);
@@ -264,7 +265,16 @@
                     if (user) {
                         userId = user.uid;
                         console.log("Authenticated with user ID:", userId);
+                        // Enable UI elements now that we are authenticated
+                        fileUploadButton.classList.remove('disabled-button');
+                        librarySelect.disabled = false;
+                        librarySelect.classList.remove('bg-gray-200');
+                        librarySelect.classList.add('bg-gray-50');
+                        fileNameDisplay.textContent = 'No file selected.';
+
                         populateLibraryDropdown();
+                    } else {
+                        fileNameDisplay.textContent = 'Authentication failed. Library disabled.';
                     }
                 });
 
@@ -277,9 +287,14 @@
             } catch (error) {
                 console.error("Firebase initialization failed:", error);
                 updateStatus('Cloud Library failed to connect.', 'error');
+                fileNameDisplay.textContent = 'Cloud library failed to connect.';
             }
         }
-
+        
+        // ... (The rest of your JavaScript functions remain the same) ...
+        // populateLibraryDropdown, savePdfToLibrary, updateLibraryPosition, 
+        // handleLibrarySelect, handleFileSelect, extractTextFromPdf, etc.
+        // No changes are needed in the core logic, only in the UI enabling/disabling.
         function populateLibraryDropdown() {
             if (!userId) {
                 librarySelect.innerHTML = '<option value="">Login required for library</option>';
@@ -291,6 +306,7 @@
             const q = query(libRef);
 
             libraryUnsubscribe = onSnapshot(q, (querySnapshot) => {
+                const currentVal = librarySelect.value;
                 librarySelect.innerHTML = ''; 
                 if (querySnapshot.empty) {
                     librarySelect.innerHTML = '<option value="">No PDFs in library</option>';
@@ -303,6 +319,7 @@
                         librarySelect.appendChild(option);
                     });
                 }
+                librarySelect.value = currentVal;
             }, (error) => {
                 console.error("Error listening to library:", error);
                 librarySelect.innerHTML = '<option value="">Error loading library</option>';
@@ -363,7 +380,7 @@
         async function handleFileSelect(event) {
             const file = event.target.files[0];
             if (!file || !userId) {
-                if (!userId) updateStatus('Please wait for library to connect.', 'error');
+                if (!userId) updateStatus('Please wait for library to connect before uploading.', 'error');
                 return;
             }
             
@@ -666,15 +683,12 @@
         async function waitForBuffer(sessionId) {
             if (sessionId !== playbackSessionId) return false;
             const isInitialPlay = !geminiAudioPlayer && audioBuffer.length === 0;
-            const requiredSize = isInitialPlay ? 3 : 1;
-            
+            const requiredSize = isInitialPlay ? 3 : 1; 
             fillBuffer(sessionId); 
-            
             while (audioBuffer.length < requiredSize && sessionId === playbackSessionId) {
                 const allKnownIndexes = [...audioBuffer.map(i => i.index), ...pendingFetchIndexes];
                 const lastKnownIndex = allKnownIndexes.length > 0 ? Math.max(...allKnownIndexes) : currentUtteranceIndex - GEMINI_PASSAGE_SIZE;
                 if (lastKnownIndex + GEMINI_PASSAGE_SIZE >= textChunks.length && audioBuffer.length > 0) break;
-                
                 const message = isInitialPlay ? `Building initial buffer... (${audioBuffer.length}/${requiredSize})` : 'Buffering...';
                 updateStatus(message, 'loading');
                 await new Promise(resolve => setTimeout(resolve, 500));
@@ -851,4 +865,3 @@
     </script>
 </body>
 </html>
-
