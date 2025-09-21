@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Aloud | Free PDF to Speech Reader with Natural Voices</title>
+    
+    <!-- SEO Meta Tags for the Tool -->
+    <meta name="description" content="Listen to your documents with our free PDF to speech reader. Uses natural-sounding Gemini voices to read your PDFs aloud. Perfect for studying, multitasking, or accessibility.">
+    <meta name="keywords" content="PDF reader, text-to-speech, read PDF aloud, PDF to speech, listen to PDF, Gemini voice reader, natural text to speech, document reader, accessibility tool, study tool, audio PDF">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles from main site + app styles -->
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #F8F9FA;
+            color: #333333;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .primary-blue { color: #2A4B8D; }
+        .bg-primary-blue { background-color: #2A4B8D; }
+        .hover\:bg-primary-blue-dark:hover { background-color: #213B70; }
+
+        /* App-specific styles from your original file */
+        #file-upload-button { cursor: pointer; }
+        #text-content { cursor: default; }
+        #text-content > span {
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            border-radius: 4px;
+            padding: 2px 1px;
+        }
+        #text-content > span:hover { background-color: rgba(59, 130, 246, 0.2); }
+        #text-content > span.highlight { background-color: rgba(59, 130, 246, 0.4); color: #1a1a1a; }
+        #text-content .word.current-word {
+            background-color: #2563EB;
+            color: #FFFFFF !important;
+            border-radius: 3px;
+            padding: 1px 2px;
+            margin: -1px -2px;
+            transition: background-color 0.1s ease-out, color 0.1s ease-out;
+        }
+        #speed-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none; width: 20px; height: 20px;
+            background: #2563EB; cursor: pointer; border-radius: 50%; margin-top: -8px;
+        }
+        #speed-slider::-moz-range-thumb {
+            width: 20px; height: 20px; background: #2563EB; cursor: pointer;
+            border-radius: 50%; border: none;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header / Navigation -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <img src="logo.png" alt="SMB AI Partners Logo" class="h-20 w-auto">
+                </a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#solutions" class="text-gray-600 hover:text-primary-blue">Solutions</a>
+                    <a href="pdf-aloud.html" class="text-primary-blue font-bold">PDF Aloud Tool</a>
+                    <a href="blog.html" class="text-gray-600 hover:text-primary-blue">Blog</a>
+                    <a href="index.html#about" class="text-gray-600 hover:text-primary-blue">About</a>
+                </nav>
+                <a href="index.html#contact" class="hidden md:inline-block bg-primary-blue text-white font-bold py-2 px-5 rounded-lg shadow-md hover:bg-primary-blue-dark">
+                    Schedule a Call
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main App Content -->
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="w-full max-w-3xl bg-white rounded-2xl shadow-lg p-6 md:p-8 space-y-6">
+            <header class="text-center">
+                <h1 class="text-3xl font-bold text-primary-blue">PDF Aloud</h1>
+                <p class="text-gray-500 mt-1">Your personal, cloud-synced PDF reader.</p>
+            </header>
+            
+            <!-- This is where your app's original main content goes -->
+            <div>
+                <!-- File Upload Section -->
+                <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center space-y-4">
+                    <div>
+                        <input type="file" id="pdf-file-input" class="hidden" accept=".pdf">
+                        <label for="pdf-file-input" id="file-upload-button" class="bg-primary-blue text-white font-semibold py-2 px-4 rounded-lg hover:bg-primary-blue-dark transition-colors duration-300 cursor-pointer">
+                            <i class="fas fa-file-pdf mr-2"></i> Choose a New PDF
+                        </label>
+                        <p id="file-name" class="mt-3 text-sm text-gray-500">No file selected.</p>
+                    </div>
+                     <!-- Library Section -->
+                    <div class="pt-2">
+                        <label for="library-select" class="block mb-2 text-sm font-medium text-gray-900">Or Select from Your Cloud Library:</label>
+                        <select id="library-select" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="">Loading Library...</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <!-- Status and Controls Section -->
+                <div id="controls-section" class="mt-6 space-y-4 hidden">
+                     <div id="status-message" class="text-center bg-gray-100 p-3 rounded-lg text-sm font-medium">
+                        Please select a file to begin.
+                    </div>
+                    
+                    <div class="flex items-center justify-center space-x-2 md:space-x-4">
+                        <button id="play-pause-btn" disabled class="w-14 h-14 bg-primary-blue text-white rounded-full flex items-center justify-center text-2xl shadow-md hover:bg-primary-blue-dark disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button id="stop-btn" disabled class="w-14 h-14 bg-red-600 text-white rounded-full flex items-center justify-center text-xl shadow-md hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300">
+                            <i class="fas fa-stop"></i>
+                        </button>
+                    </div>
+    
+                    <!-- Voice Selection -->
+                    <div class="flex items-center justify-center space-x-3 w-full max-w-sm mx-auto pt-4">
+                        <i class="fas fa-volume-up text-gray-500"></i>
+                        <select id="voice-select" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                            <option selected>Loading voices...</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Table of Contents Dropdown -->
+                    <div id="toc-container" class="flex items-center justify-center space-x-3 w-full max-w-sm mx-auto pt-2 hidden">
+                        <i class="fas fa-list-ul text-gray-500"></i>
+                        <select id="toc-select" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                            <option>Select a Chapter...</option>
+                        </select>
+                    </div>
+    
+                    <!-- Speed Controls -->
+                    <div class="flex items-center justify-center space-x-3 w-full max-w-sm mx-auto pt-2">
+                        <i class="fas fa-tachometer-alt text-gray-500"></i>
+                        <input type="range" id="speed-slider" min="0.5" max="3" value="1" step="0.1" class="w-full h-4 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <span id="speed-value" class="text-sm font-semibold w-12 text-center text-gray-700">1.0x</span>
+                    </div>
+                </div>
+    
+                <!-- Text Content Display -->
+                <div id="text-content-container" class="mt-6 hidden">
+                    <h2 class="text-lg font-semibold mb-2">Extracted Text (Click any sentence to play):</h2>
+                    <div id="text-content" class="w-full h-48 bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm overflow-y-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <p>&copy; 2025 SMB AI Partners. All Rights Reserved.</p>
+            <div class="mt-2 text-sm">
+                <a href="terms.html" class="hover:text-white">Terms</a>
+                <span class="mx-2">|</span>
+                <a href="#" class="hover:text-white">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Your App's JavaScript -->
+    <script type="module">
+        // Paste the entire <script type="module"> content from your original 'pdf aloud.html' file here
+        // No changes are needed to the JavaScript itself.
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, collection, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
+
+        const fileInput = document.getElementById('pdf-file-input');
+        const fileNameDisplay = document.getElementById('file-name');
+        const librarySelect = document.getElementById('library-select');
+        const controlsSection = document.getElementById('controls-section');
+        const statusMessage = document.getElementById('status-message');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const voiceSelect = document.getElementById('voice-select');
+        const speedSlider = document.getElementById('speed-slider');
+        const speedValueDisplay = document.getElementById('speed-value');
+        const textContentContainer = document.getElementById('text-content-container');
+        const textContentDiv = document.getElementById('text-content');
+        const tocContainer = document.getElementById('toc-container');
+        const tocSelect = document.getElementById('toc-select');
+
+        let currentPDFId = '';
+        let fullText = '';
+        let textChunks = [];
+        let pageStartIndexes = {};
+        let currentRate = 1;
+        let isPaused = false;
+        let currentUtteranceIndex = 0;
+        let voices = [];
+        let selectedVoice = null;
+        let geminiAudioPlayer = null; 
+        let isGeminiVoiceSelected = false;
+        const GEMINI_PASSAGE_SIZE = 5;
+        let audioBuffer = [];
+        let isFillingBuffer = false;
+        const TARGET_BUFFER_SIZE = 5;
+        let pendingFetchIndexes = new Set();
+        let playbackSessionId = null;
+        let currentWordHighlightSpan = null;
+
+        let db, auth, userId, appId;
+        let libraryUnsubscribe = null;
+
+        function populateVoiceList() {
+            voices = speechSynthesis.getVoices();
+            voiceSelect.innerHTML = '';
+            
+            const geminiOption = document.createElement('option');
+            geminiOption.textContent = '✨ Gemini Voice (Natural)';
+            geminiOption.setAttribute('data-name', 'Gemini');
+            voiceSelect.appendChild(geminiOption);
+
+            if (voices.length === 0 && voiceSelect.options.length === 1) {
+                 voiceSelect.innerHTML += '<option>No local voices available</option>';
+            }
+
+            voices.forEach((voice) => {
+                const option = document.createElement('option');
+                option.textContent = `${voice.name} (${voice.lang})`;
+                option.setAttribute('data-name', voice.name);
+                voiceSelect.appendChild(option);
+            });
+            
+            handleVoiceChange();
+        }
+        
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = populateVoiceList;
+        }
+
+        async function initFirebase() {
+            try {
+                appId = typeof __app_id !== 'undefined' ? __app_id : 'default-pdf-aloud';
+                if (typeof __firebase_config === 'undefined') {
+                    updateStatus('Firebase not configured. Library is disabled.', 'error');
+                    console.error("Firebase config is missing.");
+                    return;
+                }
+                const firebaseConfig = JSON.parse(__firebase_config);
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                
+                onAuthStateChanged(auth, user => {
+                    if (user) {
+                        userId = user.uid;
+                        console.log("Authenticated with user ID:", userId);
+                        populateLibraryDropdown();
+                    }
+                });
+
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+            } catch (error) {
+                console.error("Firebase initialization failed:", error);
+                updateStatus('Cloud Library failed to connect.', 'error');
+            }
+        }
+
+        function populateLibraryDropdown() {
+            if (!userId) {
+                librarySelect.innerHTML = '<option value="">Login required for library</option>';
+                return;
+            }
+            if (libraryUnsubscribe) libraryUnsubscribe();
+
+            const libRef = collection(db, "artifacts", appId, "users", userId, "library");
+            const q = query(libRef);
+
+            libraryUnsubscribe = onSnapshot(q, (querySnapshot) => {
+                librarySelect.innerHTML = ''; 
+                if (querySnapshot.empty) {
+                    librarySelect.innerHTML = '<option value="">No PDFs in library</option>';
+                } else {
+                    librarySelect.innerHTML = '<option value="">Select a PDF...</option>';
+                    querySnapshot.forEach((doc) => {
+                        const option = document.createElement('option');
+                        option.value = doc.id;
+                        option.textContent = doc.data().filename;
+                        librarySelect.appendChild(option);
+                    });
+                }
+            }, (error) => {
+                console.error("Error listening to library:", error);
+                librarySelect.innerHTML = '<option value="">Error loading library</option>';
+            });
+        }
+        
+        async function savePdfToLibrary(docId, filename, text, toc, pageMap) {
+            if (!userId) return;
+            const docRef = doc(db, "artifacts", appId, "users", userId, "library", docId);
+            try {
+                await setDoc(docRef, { filename, text, toc, pageMap, lastPosition: 0 });
+                console.log("Saved to Firestore:", filename);
+            } catch (e) {
+                console.error("Error saving to Firestore", e);
+                updateStatus('Could not save PDF to cloud library.', 'error');
+            }
+        }
+
+        async function updateLibraryPosition(docId, position) {
+            if (!userId || !docId) return;
+            const docRef = doc(db, "artifacts", appId, "users", userId, "library", docId);
+            try {
+                await updateDoc(docRef, { lastPosition: position });
+            } catch (e) { console.error("Error updating position in Firestore", e); }
+        }
+
+       async function handleLibrarySelect(event) {
+            const docId = event.target.value;
+            if (!docId) return;
+            handleStop();
+            resetControls();
+            
+            const docRef = doc(db, "artifacts", appId, "users", userId, "library", docId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const pdfData = docSnap.data();
+                currentPDFId = docId;
+                fileInput.value = ''; 
+                fileNameDisplay.textContent = `Loaded from library: ${pdfData.filename}`;
+                fullText = pdfData.text;
+                pageStartIndexes = pdfData.pageMap || {};
+                renderToc(pdfData.toc || [], pageStartIndexes);
+                processAndRenderText(fullText);
+                
+                controlsSection.classList.remove('hidden');
+                textContentContainer.classList.remove('hidden');
+                playPauseBtn.disabled = false;
+                stopBtn.disabled = false;
+                
+                currentUtteranceIndex = pdfData.lastPosition || 0;
+                updateStatus(`Ready to play from saved position.`, 'success');
+                highlightCurrentChunk();
+                textContentDiv.scrollTop = document.getElementById(`chunk-${currentUtteranceIndex}`)?.offsetTop - textContentDiv.offsetTop || 0;
+            }
+        }
+
+        async function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file || !userId) {
+                if (!userId) updateStatus('Please wait for library to connect.', 'error');
+                return;
+            }
+            
+            librarySelect.value = ''; 
+            fileNameDisplay.textContent = `New file: ${file.name}`;
+            controlsSection.classList.remove('hidden');
+            textContentContainer.classList.add('hidden');
+            handleStop();
+            resetControls();
+            
+            updateStatus('Loading and processing PDF...', 'loading');
+
+            try {
+                const { extractedText, toc, pageChunkMap } = await extractTextFromPdf(file);
+                
+                if (!extractedText || extractedText.trim().length < 20) {
+                     throw new Error("No readable text found. The PDF may be a scan.");
+                }
+                
+                currentPDFId = file.name.replace(/[^a-zA-Z0-9]/g, '');
+                fullText = extractedText;
+                pageStartIndexes = pageChunkMap;
+                await savePdfToLibrary(currentPDFId, file.name, fullText, toc, pageChunkMap);
+                renderToc(toc, pageStartIndexes);
+                processAndRenderText(fullText);
+                currentUtteranceIndex = 0; 
+                
+                textContentContainer.classList.remove('hidden');
+                updateStatus('Ready to play. Click any sentence to start reading.', 'success');
+                playPauseBtn.disabled = false;
+                stopBtn.disabled = false;
+            } catch (error) {
+                console.error('Error processing PDF:', error);
+                updateStatus(error.message || 'Failed to process PDF.', 'error');
+                resetControls();
+            }
+        }
+        
+       async function extractTextFromPdf(file) {
+            const reader = new FileReader();
+            return new Promise((resolve, reject) => {
+                reader.onload = async (e) => {
+                    try {
+                        const typedarray = new Uint8Array(e.target.result);
+                        const pdf = await pdfjsLib.getDocument(typedarray).promise;
+                        let chunksWithPages = [];
+                        let tocEntries = [];
+                        const outline = await pdf.getOutline();
+                        if (outline && outline.length > 0) {
+                            async function traverseOutline(items) {
+                                for (const item of items) {
+                                    if (item.dest && Array.isArray(item.dest) && item.dest[0]) {
+                                        const pageIndex = await pdf.getPageIndex(item.dest[0]);
+                                        tocEntries.push({ title: item.title, page: pageIndex + 1 });
+                                    }
+                                    if (item.items && item.items.length > 0) await traverseOutline(item.items);
+                                }
+                            }
+                            await traverseOutline(outline);
+                        }
+                        for (let i = 1; i <= pdf.numPages; i++) {
+                            updateStatus(`Processing page ${i} of ${pdf.numPages}...`, 'loading');
+                            const page = await pdf.getPage(i);
+                            const content = await page.getTextContent();
+                            let pageText = content.items.map(item => item.str).join(' ');
+                            const chunksOnPage = (pageText.match(/[^.!?]+[.!?]+(\s|$)/g) || [pageText]).map(c => c.trim()).filter(c => c.length > 0);
+                            chunksOnPage.forEach(chunk => chunksWithPages.push({ text: chunk, pageNum: i }));
+                        }
+                        const finalChunks = chunksWithPages.map(c => c.text);
+                        let fullExtractedText = finalChunks.join(' ');
+                        let pageChunkMap = {};
+                        chunksWithPages.forEach((chunk, index) => {
+                            if (pageChunkMap[chunk.pageNum] === undefined) {
+                                pageChunkMap[chunk.pageNum] = index;
+                            }
+                        });
+                        const uniqueToc = [...new Map(tocEntries.map(item => [item.title, item])).values()];
+                        uniqueToc.sort((a, b) => a.page - b.page);
+                        resolve({ extractedText: fullExtractedText, toc: uniqueToc, pageChunkMap });
+                    } catch (error) { reject(error); }
+                };
+                reader.onerror = reject;
+                reader.readAsArrayBuffer(file);
+        });
+       }
+
+        function processAndRenderText(text) {
+            fullText = text;
+            const chunks = text.match(/[^.!?]+[.!?]+(\s|$)/g) || [text];
+            textChunks = chunks.map(c => c.trim()).filter(c => c.length > 0);
+            textContentDiv.innerHTML = '';
+            textChunks.forEach((chunk, chunkIndex) => {
+                const sentenceContainer = document.createElement('span');
+                sentenceContainer.id = `chunk-${chunkIndex}`;
+                sentenceContainer.onclick = () => handleTextClick(chunkIndex);
+                const words = chunk.split(/(\s+)/);
+                words.forEach(word => {
+                    if (word.trim().length > 0) {
+                        const wordSpan = document.createElement('span');
+                        wordSpan.textContent = word;
+                        wordSpan.className = 'word';
+                        sentenceContainer.appendChild(wordSpan);
+                    } else {
+                        sentenceContainer.appendChild(document.createTextNode(word));
+                    }
+                });
+                textContentDiv.appendChild(sentenceContainer);
+                textContentDiv.appendChild(document.createTextNode(' '));
+            });
+        }
+
+        function renderToc(toc, pageMap) {
+            tocSelect.innerHTML = '<option value="">Select a Chapter...</option>';
+            if (toc && toc.length > 0) {
+                toc.forEach(entry => {
+                    if (pageMap[entry.page] !== undefined) {
+                        const option = document.createElement('option');
+                        option.value = pageMap[entry.page];
+                        option.textContent = `${entry.title} (Page ${entry.page})`;
+                        tocSelect.appendChild(option);
+                    }
+                });
+                tocContainer.classList.remove('hidden');
+            } else {
+                tocContainer.classList.add('hidden');
+            }
+        }
+        
+        function handleTocSelect(event) {
+            const chunkIndex = parseInt(event.target.value, 10);
+            if (!isNaN(chunkIndex)) {
+                speakText(chunkIndex);
+                event.target.selectedIndex = 0;
+            }
+        }
+
+        function handlePlayPause() {
+            const isSpeaking = isGeminiVoiceSelected ? (geminiAudioPlayer && !geminiAudioPlayer.paused) : speechSynthesis.speaking;
+            
+            if (isSpeaking && !isPaused) {
+                if (isGeminiVoiceSelected) geminiAudioPlayer.pause();
+                else speechSynthesis.pause();
+                isPaused = true;
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                updateStatus('Paused.', 'info');
+            } else if (isPaused) {
+                if (isGeminiVoiceSelected) geminiAudioPlayer.play();
+                else speechSynthesis.resume();
+                isPaused = false;
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                updateStatus('Reading...', 'info');
+            } else {
+                speakText(currentUtteranceIndex);
+            }
+        }
+        
+        function handleTextClick(index) {
+            speakText(index);
+        }
+
+        function handleStop() {
+            playbackSessionId = null; 
+            speechSynthesis.cancel();
+            if (geminiAudioPlayer) {
+                geminiAudioPlayer.onended = null;
+                geminiAudioPlayer.pause();
+                geminiAudioPlayer = null;
+            }
+             if (currentWordHighlightSpan) {
+                currentWordHighlightSpan.classList.remove('current-word');
+                currentWordHighlightSpan = null;
+            }
+            isPaused = false;
+            isFillingBuffer = false;
+            audioBuffer = [];
+            pendingFetchIndexes.clear();
+            currentUtteranceIndex = 0;
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            removeHighlight();
+            if(fullText) updateStatus('Stopped. Ready to play.', 'success');
+        }
+
+        function handleSpeedChange(event) {
+            currentRate = parseFloat(event.target.value);
+            speedValueDisplay.textContent = `${currentRate.toFixed(1)}x`;
+            if (isGeminiVoiceSelected && geminiAudioPlayer) {
+                geminiAudioPlayer.playbackRate = currentRate;
+            } else if (!isGeminiVoiceSelected && speechSynthesis.speaking && !isPaused) {
+                speechSynthesis.cancel();
+                playNextUtterance(playbackSessionId);
+            }
+        }
+        
+        function speakText(startIndex = 0) {
+            if (!textChunks.length) return;
+            handleStop();
+            playbackSessionId = Date.now();
+            isPaused = false;
+            currentUtteranceIndex = startIndex;
+            playNextUtterance(playbackSessionId);
+        }
+
+        function playNextUtterance(sessionId) {
+            if (sessionId !== playbackSessionId) return;
+            if (currentUtteranceIndex >= textChunks.length) {
+                updateStatus('Finished reading.', 'success');
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                removeHighlight();
+                updateLibraryPosition(currentPDFId, 0); 
+                return;
+            }
+            updateLibraryPosition(currentPDFId, currentUtteranceIndex);
+
+            if (isGeminiVoiceSelected) {
+                playGeminiPassage(sessionId);
+            } else {
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                updateStatus('Reading...', 'info');
+                highlightCurrentChunk();
+                const textToSpeak = textChunks[currentUtteranceIndex];
+                speakWithBrowser(textToSpeak, sessionId);
+            }
+        }
+        
+        function speakWithBrowser(text, sessionId) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = currentRate;
+            if (selectedVoice) utterance.voice = selectedVoice;
+            
+            const sentenceContainer = document.getElementById(`chunk-${currentUtteranceIndex}`);
+            const wordSpansInSentence = sentenceContainer ? Array.from(sentenceContainer.querySelectorAll('.word')) : [];
+            let currentWordIndex = 0;
+
+            utterance.onboundary = (event) => {
+                if (sessionId !== playbackSessionId || event.name !== 'word') return;
+                if (currentWordHighlightSpan) currentWordHighlightSpan.classList.remove('current-word');
+                const charIndex = event.charIndex;
+                for (let i = currentWordIndex; i < wordSpansInSentence.length; i++) {
+                    const wordText = wordSpansInSentence[i].textContent;
+                    if (text.substring(charIndex).startsWith(wordText)) {
+                        currentWordHighlightSpan = wordSpansInSentence[i];
+                        currentWordHighlightSpan.classList.add('current-word');
+                        currentWordIndex = i + 1;
+                        break;
+                    }
+                }
+            };
+            
+            utterance.onend = () => { 
+                if (currentWordHighlightSpan) {
+                    currentWordHighlightSpan.classList.remove('current-word');
+                    currentWordHighlightSpan = null;
+                }
+                if (!isPaused && sessionId === playbackSessionId) { 
+                    currentUtteranceIndex++; 
+                    playNextUtterance(sessionId); 
+                } 
+            };
+            
+            utterance.onerror = (e) => { 
+                if (currentWordHighlightSpan) {
+                    currentWordHighlightSpan.classList.remove('current-word');
+                    currentWordHighlightSpan = null;
+                }
+                if (e.error !== 'canceled') console.error('Speech error:', e); 
+            };
+            
+            speechSynthesis.speak(utterance);
+        }
+
+        async function playGeminiPassage(sessionId) {
+            if (sessionId !== playbackSessionId) return;
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            highlightCurrentChunk();
+            
+            const readyToPlay = await waitForBuffer(sessionId);
+            if (!readyToPlay) return; 
+
+            const { url, index } = audioBuffer.shift();
+            startGeminiPlayback(url, index + GEMINI_PASSAGE_SIZE, sessionId);
+            fillBuffer(sessionId); 
+        }
+        
+        function startGeminiPlayback(audioUrl, nextIndex, sessionId) {
+            if (sessionId !== playbackSessionId) return;
+            geminiAudioPlayer = new Audio(audioUrl);
+            geminiAudioPlayer.playbackRate = currentRate;
+            geminiAudioPlayer.play();
+            updateStatus('Reading...', 'info');
+
+            geminiAudioPlayer.onended = () => {
+                if (!isPaused && sessionId === playbackSessionId) {
+                    geminiAudioPlayer = null;
+                    currentUtteranceIndex = nextIndex;
+                    playNextUtterance(sessionId);
+                }
+            };
+        }
+
+        async function waitForBuffer(sessionId) {
+            if (sessionId !== playbackSessionId) return false;
+            const isInitialPlay = !geminiAudioPlayer && audioBuffer.length === 0;
+            const requiredSize = isInitialPlay ? 3 : 1;
+            
+            fillBuffer(sessionId); 
+            
+            while (audioBuffer.length < requiredSize && sessionId === playbackSessionId) {
+                const allKnownIndexes = [...audioBuffer.map(i => i.index), ...pendingFetchIndexes];
+                const lastKnownIndex = allKnownIndexes.length > 0 ? Math.max(...allKnownIndexes) : currentUtteranceIndex - GEMINI_PASSAGE_SIZE;
+                if (lastKnownIndex + GEMINI_PASSAGE_SIZE >= textChunks.length && audioBuffer.length > 0) break;
+                
+                const message = isInitialPlay ? `Building initial buffer... (${audioBuffer.length}/${requiredSize})` : 'Buffering...';
+                updateStatus(message, 'loading');
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            return sessionId === playbackSessionId && audioBuffer.length > 0;
+        }
+
+        async function fillBuffer(sessionId) {
+            if (isFillingBuffer || sessionId !== playbackSessionId) return;
+            isFillingBuffer = true;
+            try {
+                const passagesToFetch = [];
+                let scanIndex = currentUtteranceIndex;
+                const allKnownIndexes = new Set([...audioBuffer.map(item => item.index), ...pendingFetchIndexes]);
+                 if (allKnownIndexes.size > 0) {
+                    scanIndex = Math.max(...allKnownIndexes) + GEMINI_PASSAGE_SIZE;
+                }
+                while (allKnownIndexes.size + passagesToFetch.length < TARGET_BUFFER_SIZE && scanIndex < textChunks.length) {
+                    const passageStartIndex = scanIndex;
+                     if(!allKnownIndexes.has(passageStartIndex)) {
+                        const passageEndIndex = Math.min(passageStartIndex + GEMINI_PASSAGE_SIZE, textChunks.length);
+                        const passageText = textChunks.slice(passageStartIndex, passageEndIndex).join(' ');
+                        if (passageText) passagesToFetch.push({ text: passageText, index: passageStartIndex });
+                    }
+                    scanIndex += GEMINI_PASSAGE_SIZE;
+                }
+
+                if (passagesToFetch.length > 0) {
+                    passagesToFetch.forEach(p => pendingFetchIndexes.add(p.index));
+                    const promises = passagesToFetch.map(p => 
+                        getGeminiTtsAudio(p.text, sessionId)
+                            .then(url => ({ url, index: p.index, status: 'fulfilled' }))
+                            .catch(error => ({ index: p.index, status: 'rejected', error }))
+                    );
+                    const results = await Promise.all(promises);
+                    if (sessionId === playbackSessionId) {
+                        results.forEach(result => {
+                            pendingFetchIndexes.delete(result.index);
+                            if (result.status === 'fulfilled') audioBuffer.push({ url: result.url, index: result.index });
+                            else console.error(`Failed to buffer passage at index ${result.index}:`, result.error.message);
+                        });
+                        audioBuffer.sort((a, b) => a.index - b.index);
+                    } else {
+                        results.forEach(result => pendingFetchIndexes.delete(result.index));
+                    }
+                }
+            } finally {
+                isFillingBuffer = false;
+                if (sessionId === playbackSessionId && audioBuffer.length + pendingFetchIndexes.size < TARGET_BUFFER_SIZE) {
+                    setTimeout(() => fillBuffer(sessionId), 100);
+                }
+            }
+        }
+
+        async function getGeminiTtsAudio(text, sessionId) {
+            if (sessionId !== playbackSessionId) throw new Error("Playback session ended");
+            if (!text || text.trim() === '') throw new Error("Cannot generate audio for empty text.");
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+            const payload = { model: "gemini-2.5-flash-preview-tts", contents: [{ parts: [{ text }] }], generationConfig: { responseModalities: ["AUDIO"] } };
+            try {
+                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                const result = await response.json();
+                if (!response.ok) {
+                    const errorDetails = result?.error?.message || `API request failed`;
+                    throw new Error(errorDetails);
+                }
+                const audioData = result.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+                const mimeType = result.candidates?.[0]?.content?.parts?.[0]?.inlineData?.mimeType;
+                if (!audioData || !mimeType) {
+                    const blockReason = result.candidates?.[0]?.finishReason;
+                    throw new Error(blockReason ? `Audio generation blocked: ${blockReason}` : "Invalid audio data in response.");
+                }
+                const sampleRateMatch = mimeType.match(/rate=(\d+)/);
+                if (!sampleRateMatch) throw new Error("Sample rate not found in mimeType");
+                const sampleRate = parseInt(sampleRateMatch[1], 10);
+                const pcmData = base64ToArrayBuffer(audioData);
+                const pcm16 = new Int16Array(pcmData);
+                const wavBlob = pcmToWav(pcm16, 1, sampleRate);
+                return URL.createObjectURL(wavBlob);
+            } catch (error) { throw error; }
+        }
+
+        function base64ToArrayBuffer(base64) {
+            const binaryString = window.atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) bytes[i] = binaryString.charCodeAt(i);
+            return bytes.buffer;
+        }
+
+        function pcmToWav(pcmData, numChannels, sampleRate) {
+            const byteRate = sampleRate * numChannels * 2;
+            const blockAlign = numChannels * 2;
+            const dataSize = pcmData.length * 2;
+            const buffer = new ArrayBuffer(44 + dataSize);
+            const view = new DataView(buffer);
+            writeString(view, 0, 'RIFF');
+            view.setUint32(4, 36 + dataSize, true);
+            writeString(view, 8, 'WAVE');
+            writeString(view, 12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true); 
+            view.setUint16(22, numChannels, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, byteRate, true);
+            view.setUint16(32, blockAlign, true);
+            view.setUint16(34, 16, true);
+            writeString(view, 36, 'data');
+            view.setUint32(40, dataSize, true);
+            for (let i = 0; i < pcmData.length; i++) view.setInt16(44 + i * 2, pcmData[i], true);
+            return new Blob([view], { type: 'audio/wav' });
+        }
+        
+        function writeString(view, offset, string) {
+            for (let i = 0; i < string.length; i++) view.setUint8(offset + i, string.charCodeAt(i));
+        }
+
+        function highlightCurrentChunk() {
+            removeHighlight();
+            const passageStartIndex = currentUtteranceIndex;
+            const passageEndIndex = isGeminiVoiceSelected ? Math.min(passageStartIndex + GEMINI_PASSAGE_SIZE, textChunks.length) : passageStartIndex + 1;
+            for (let i = passageStartIndex; i < passageEndIndex; i++) {
+                const span = document.getElementById(`chunk-${i}`);
+                if (span) span.classList.add('highlight');
+            }
+            const firstSpan = document.getElementById(`chunk-${passageStartIndex}`);
+            if (firstSpan) firstSpan.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+        }
+
+        function removeHighlight() {
+            document.querySelectorAll('#text-content .highlight').forEach(span => span.classList.remove('highlight'));
+        }
+        
+        function updateStatus(message, type = 'info') {
+            statusMessage.textContent = message;
+            statusMessage.className = 'text-center p-3 rounded-lg text-sm font-medium ';
+            switch(type) {
+                case 'success': statusMessage.classList.add('bg-green-100', 'text-green-800', 'dark:bg-green-900', 'dark:text-green-200'); break;
+                case 'error': statusMessage.classList.add('bg-red-100', 'text-red-800', 'dark:bg-red-900', 'dark:text-red-200'); break;
+                case 'loading': statusMessage.classList.add('bg-yellow-100', 'text-yellow-800', 'dark:bg-yellow-900', 'dark:text-yellow-200'); break;
+                default: statusMessage.classList.add('bg-blue-100', 'text-blue-800', 'dark:bg-blue-900', 'dark:text-blue-200'); break;
+            }
+        }
+
+        function resetControls() {
+            playPauseBtn.disabled = true;
+            stopBtn.disabled = true;
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        }
+
+        function handleVoiceChange() {
+            handleStop();
+            const selectedOptionName = voiceSelect.selectedOptions[0].getAttribute('data-name');
+            if (selectedOptionName === 'Gemini') {
+                isGeminiVoiceSelected = true;
+                selectedVoice = null;
+            } else {
+                isGeminiVoiceSelected = false;
+                selectedVoice = voices.find(voice => voice.name === selectedOptionName);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initFirebase();
+            fileInput.addEventListener('change', handleFileSelect);
+            librarySelect.addEventListener('change', handleLibrarySelect);
+            playPauseBtn.addEventListener('click', handlePlayPause);
+            stopBtn.addEventListener('click', handleStop);
+            speedSlider.addEventListener('input', handleSpeedChange);
+            voiceSelect.addEventListener('change', handleVoiceChange);
+            tocSelect.addEventListener('change', handleTocSelect);
+        });
+    </script>
+</body>
+</html>
+
