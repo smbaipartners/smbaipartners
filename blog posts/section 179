@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 2025 SMB AI Tax Credit Opportunity | SMB AI Partners</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Learn how small businesses can use R&D credits, Section 179, and 100% bonus depreciation to de-risk first AI investments before year-end 2025.">
+    <meta name="keywords" content="SMB AI tax credit, R&D credit software, Section 179 AI, bonus depreciation 2025, AI investment, small business tax incentives">
+
+    <!-- Tailwind CSS, Google Fonts, and Custom Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Lato', sans-serif; background-color: #F8F9FA; color: #333333; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .primary-blue { color: #2A4B8D; }
+        .bg-primary-blue { background-color: #2A4B8D; }
+        .hover\:bg-primary-blue-dark:hover { background-color: #213B70; }
+        /* Styles for blog content area */
+        .prose h2 { margin-top: 2em; margin-bottom: 1em; font-size: 1.875rem; line-height: 2.25rem; font-weight: 600; color: #2A4B8D;}
+        .prose h3 { margin-top: 1.6em; margin-bottom: 0.8em; font-size: 1.5rem; line-height: 2rem; font-weight: 600; }
+        .prose p, .prose li { font-size: 1.125rem; line-height: 1.75; color: #4b5563; }
+        .prose a { color: #2563EB; text-decoration: underline; }
+        .prose a:hover { color: #1D4ED8; }
+        .prose blockquote { border-left-color: #2A4B8D; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html"><img src="../logo.png" alt="SMB AI Partners Logo" class="h-20 w-auto"></a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="../index.html#solutions" class="text-gray-600 hover:text-primary-blue">Solutions</a>
+                <a href="../PDF Aloud Tool.html" class="text-gray-600 hover:text-primary-blue">PDF Aloud Tool</a>
+                <a href="../blog.html" class="text-primary-blue font-bold">Blog</a>
+                <a href="../index.html#about" class="text-gray-600 hover:text-primary-blue">About</a>
+            </nav>
+            <a href="../index.html#contact" class="hidden md:inline-block bg-primary-blue text-white font-bold py-2 px-5 rounded-lg shadow-md hover:bg-primary-blue-dark">Schedule a Call</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow py-16 md:py-24">
+        <div class="container mx-auto px-6">
+            <article class="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-lg prose lg:prose-xl">
+                <!-- Post Header -->
+                <h1>The 2025 SMB AI Tax Credit Opportunity</h1>
+                <p class="text-gray-500 text-base">Published on October 9, 2025</p>
+
+                <!-- Post Body -->
+                <h3>TL;DR</h3>
+                <ul>
+                    <li><strong>R&D credit</strong>: Stronger IRS documentation rules apply to AI/software work in 2025.</li>
+                    <li><strong>Section 179 + Bonus Depreciation</strong>: Combine for near-total first-year write-offs on AI tools and equipment.</li>
+                    <li><strong>Act fast</strong>: The biggest benefits apply to purchases made before the end of 2025.</li>
+                </ul>
+
+                <hr class="my-8">
+
+                <h2>The overlooked AI incentive window for SMBs</h2>
+                <p>If you’re a small business thinking about your first AI investment, the final quarter of 2025 quietly opened a major tax advantage window. Three incentives—the federal <strong>R&D credit</strong>, <strong>Section 179 deduction</strong>, and newly restored <strong>100% bonus depreciation</strong>—can dramatically reduce the effective cost of getting started.</p>
+                <p>That means your first chatbot, automation tool, or AI-driven workflow may not just pay off in productivity. It might pay off at tax time too. But timing is everything. To capture the full benefit, your purchases or contracts must be executed <strong>before December 31, 2025</strong>.</p>
+
+                <h2>The IRS just raised the bar on R&D credit claims</h2>
+                <p>The <strong>R&D credit (IRC §41)</strong> remains the most powerful federal incentive for innovation. It covers qualifying expenses for <strong>software development, data engineering, model training, or other technical experimentation</strong>.</p>
+                <p>In 2025, the IRS updated <strong>Form 6765</strong> and began <strong>phasing in expanded reporting requirements</strong>. Small businesses now need stronger <strong>contemporaneous technical documentation</strong> to substantiate claims. That means tracking hypotheses, iterations, code commits, and test results throughout development—not after the fact.</p>
+                <p>If your AI initiative involves experimenting with algorithms or cleaning messy data to train a model, part of that cost may qualify under §41.</p>
+                <p><strong>Key takeaway:</strong> Treat documentation as part of R&D, not paperwork after it.</p>
+
+                <h2>Section 179: the most flexible deduction for AI equipment</h2>
+                <p>For <strong>tax years beginning in 2025</strong>, small businesses can deduct up to <strong>$1,250,000</strong> of eligible property under <strong>Section 179</strong>, with the phase-out starting at <strong>$3,130,000</strong>. This includes <strong>off-the-shelf software, computers, servers, and other AI-ready equipment</strong> used for business.</p>
+                <p>In plain terms: if you buy the computers or software needed to run your AI tools, you can typically expense them right away instead of depreciating over years.</p>
+                <p><strong>Pro tip:</strong> Match your AI purchases to your tax strategy. Section 179 gives you control over which assets to expense and which to depreciate.</p>
+
+                <h2>Bonus depreciation is back and more generous than ever</h2>
+                <p>Thanks to the <strong>One Big Beautiful Bill Act (OBBBA)</strong>, passed in July 2025, businesses can now <strong>write off 100% of qualified property</strong> placed in service after <strong>January 19, 2025</strong>. This bonus depreciation can apply <strong>in addition to or instead of</strong> Section 179 for eligible technology purchases.</p>
+                <p>The catch: acquisition and binding contract dates matter. Only property purchased or contracted after that January threshold qualifies for full expensing.</p>
+                
+                <h2>Don’t forget state-level incentives (especially in California)</h2>
+                <p>Federal credits aren’t the whole story. Many states offer <strong>stackable R&D incentives</strong> that can further lower your AI investment cost. In <strong>California</strong>, for example, the <strong>research credit equals 15% of qualified research expenses above a base amount, or 24% for basic research payments</strong>.</p>
+
+                <h2>Your year-end AI tax credit checklist</h2>
+                <ol>
+                    <li><strong>Map AI workstreams that may qualify as R&D.</strong> Tag experimentation, model tuning, and uncertainty-driven tasks; separate these from routine implementation.</li>
+                    <li><strong>Time purchases strategically.</strong> Plan major acquisitions in <strong>Q4 2025</strong> to qualify for 100% bonus depreciation.</li>
+                    <li><strong>Document everything from day one.</strong> Track experiments, commits, sprint logs, and invoices in real time.</li>
+                    <li><strong>Stack state credits where available.</strong> If you operate in California or other credit-friendly states, calculate the combined impact.</li>
+                    <li><strong>Coordinate with your CPA early.</strong> Model both deduction and credit scenarios and verify software eligibility.</li>
+                </ol>
+
+                <h2>Key takeaway</h2>
+                <p>AI adoption doesn’t have to feel risky or expensive. Between the <strong>R&D credit</strong>, <strong>Section 179</strong>, and <strong>bonus depreciation</strong>, small businesses have more leverage than ever to test, learn, and scale with minimal financial downside.</p>
+                <p><strong>Action step:</strong> Before December 31, meet with your CPA or tax advisor. Ask one question: <em>“How can I structure this AI investment to qualify for the 2025 incentives?”</em></p>
+
+                <hr class="my-8">
+                
+                <h3>Sources</h3>
+                <ul class="text-sm list-none p-0">
+                    <li><a href="https://www.irs.gov/instructions/i6765" target="_blank" rel="noopener noreferrer">IRS — Instructions for Form 6765</a></li>
+                    <li><a href="https://kpmg.com/kpmg-us/content/dam/kpmg/taxnewsflash/pdf/2025/04/tnf-wnit-form-6765-apr21-2025.pdf" target="_blank" rel="noopener noreferrer">KPMG — Decoding the New IRS Form 6765 (Apr 21, 2025)</a></li>
+                    <li><a href="https://www.irs.gov/pub/irs-pdf/p946.pdf" target="_blank" rel="noopener noreferrer">IRS — Publication 946 (2024)</a></li>
+                    <li><a href="https://www.congress.gov/bill/119th-congress/house-bill/1" target="_blank" rel="noopener noreferrer">Congress.gov — H.R.1: One Big Beautiful Bill Act</a></li>
+                    <li><a href="https://www.bdo.com/insights/tax/one-big-beautiful-bill-act-expands-100-depreciation-expensing-opportunities" target="_blank" rel="noopener noreferrer">BDO — OBBBA Expands 100% Depreciation/Expensing</a></li>
+                    <li><a href="https://www.ftb.ca.gov/file/business/credits/california-research.html" target="_blank" rel="noopener noreferrer">California Franchise Tax Board — Research Credit</a></li>
+                    <li><a href="https://advocacy.sba.gov/2025/09/24/ai-in-business-small-firms-closing-in/" target="_blank" rel="noopener noreferrer">SBA Office of Advocacy — AI in Business: Small Firms Closing In (Sept 24, 2025)</a></li>
+                </ul>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <p>&copy; 2025 SMB AI Partners. All Rights Reserved.</p>
+            <div class="mt-2 text-sm">
+                <a href="../terms.html" class="hover:text-white">Terms</a> | <a href="#" class="hover:text-white">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
