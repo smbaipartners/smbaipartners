@@ -5,97 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog | SMB AI Partners</title>
     
-    <!-- Tailwind CSS -->
+    <meta name="description" content="Articles and insights on AI automation, SMS loyalty, and growth strategies for small businesses from SMB AI Partners.">
+
+    <!-- Tailwind CSS, Google Fonts, and Custom Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-
-    <!-- Custom Styles -->
     <style>
-        body {
-            font-family: 'Lato', sans-serif;
-            background-color: #F8F9FA;
-            color: #333333;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Poppins', sans-serif;
-        }
+        body { font-family: 'Lato', sans-serif; background-color: #F8F9FA; color: #333333; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
         .primary-blue { color: #2A4B8D; }
         .bg-primary-blue { background-color: #2A4B8D; }
         .hover\:bg-primary-blue-dark:hover { background-color: #213B70; }
     </style>
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
 
-    <!-- Header / Navigation -->
-    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <a href="index.html" class="flex items-center space-x-3">
-                    <img src="logo.png" alt="SMB AI Partners Logo" class="h-16 w-auto">
-                </a>
-
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="index.html#problem" class="text-gray-600 hover:text-primary-blue transition-colors">The Problem</a>
-                    <a href="index.html#solutions" class="text-gray-600 hover:text-primary-blue transition-colors">Solutions</a>
-                    <a href="blog.html" class="text-primary-blue font-bold">Blog</a>
-                    <a href="index.html#about" class="text-gray-600 hover:text-primary-blue transition-colors">About</a>
-                </nav>
-
-                <!-- CTA Button -->
-                <a href="index.html#contact" class="hidden md:inline-block bg-primary-blue text-white font-bold py-2 px-5 rounded-lg shadow-md hover:bg-primary-blue-dark transition-all transform hover:scale-105">
-                    Schedule a Call
-                </a>
-            </div>
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html"><img src="logo.png" alt="SMB AI Partners Logo" class="h-20 w-auto"></a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html#solutions" class="text-gray-600 hover:text-primary-blue">Solutions</a>
+                <a href="PDF Aloud Tool.html" class="text-gray-600 hover:text-primary-blue">PDF Aloud Tool</a>
+                <a href="blog.html" class="text-primary-blue font-bold">Blog</a>
+                <a href="index.html#about" class="text-gray-600 hover:text-primary-blue">About</a>
+            </nav>
+            <a href="index.html#contact" class="hidden md:inline-block bg-primary-blue text-white font-bold py-2 px-5 rounded-lg shadow-md hover:bg-primary-blue-dark">Schedule a Call</a>
         </div>
     </header>
 
-    <main>
-        <!-- Blog Header -->
-        <section class="bg-gray-100 py-16">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold primary-blue">The SMB AI Partners Blog</h1>
-                <p class="mt-2 text-lg text-gray-600">Actionable advice for growing your small business with automation.</p>
+    <!-- Main Content -->
+    <main class="flex-grow py-16 md:py-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold primary-blue">SMB AI Partners Blog</h1>
+                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Insights on AI, automation, and growth strategies for small businesses.</p>
             </div>
-        </section>
 
-        <!-- Blog Grid -->
-        <section class="py-20">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Blog Post Card -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform">
-                        <a href="blog posts/stop-chasing-leads.html" class="block">
-                            <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop" class="h-56 w-full object-cover" alt="Contractor working on a laptop at a construction site">
-                            <div class="p-6">
-                                <p class="text-sm text-gray-500">August 27, 2025</p>
-                                <h3 class="mt-2 text-xl font-bold primary-blue">Stop Chasing Leads After Work. Get an AI That Wins You Bids.</h3>
-                                <p class="mt-2 text-gray-600">The 6 PM scramble is a frustrating cycle that eats into your personal time and costs you business. Here's how to end it for good.</p>
-                                <span class="mt-4 inline-block font-bold text-primary-blue">Read More &rarr;</span>
-                            </div>
-                        </a>
-                    </div>
+            <div class="max-w-3xl mx-auto space-y-12">
+                <!-- New Blog Post -->
+                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <p class="text-sm text-gray-500">October 9, 2025</p>
+                    <h2 class="mt-2 text-3xl font-bold text-gray-800 hover:text-primary-blue">
+                        <a href="blog posts/smb-ai-tax-credit-opportunity.html">The 2025 SMB AI Tax Credit Opportunity</a>
+                    </h2>
+                    <p class="mt-4 text-gray-600">Learn how small businesses can use R&D credits, Section 179, and 100% bonus depreciation to de-risk first AI investments before year-end 2025.</p>
+                    <a href="blog posts/smb-ai-tax-credit-opportunity.html" class="mt-6 inline-block text-primary-blue font-bold hover:underline">Read More &rarr;</a>
+                </div>
 
-                    <!-- Add more blog post cards here as you write them -->
-
+                <!-- Previous Blog Post -->
+                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <p class="text-sm text-gray-500">September 25, 2025</p>
+                    <h2 class="mt-2 text-3xl font-bold text-gray-800 hover:text-primary-blue">
+                        <a href="blog posts/stop-chasing-leads.html">Stop Chasing Leads After Work. Get an AI That Wins You Bids.</a>
+                    </h2>
+                    <p class="mt-4 text-gray-600">The 6 PM scramble is costing you time and money. Here’s how to automate your lead follow-up and get your evenings back...</p>
+                    <a href="blog posts/stop-chasing-leads.html" class="mt-6 inline-block text-primary-blue font-bold hover:underline">Read More &rarr;</a>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-10">
         <div class="container mx-auto px-6 text-center text-gray-400">
             <p>&copy; 2025 SMB AI Partners. All Rights Reserved.</p>
-            <p class="text-sm mt-2">Serving San Diego County and Beyond</p>
+            <div class="mt-2 text-sm">
+                <a href="terms.html" class="hover:text-white">Terms</a> | <a href="#" class="hover:text-white">Privacy Policy</a>
+            </div>
         </div>
     </footer>
 
 </body>
 </html>
-
