@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMB AI Partners | Stop Juggling Tasks, Start Growing Your Business</title>
-    
+    <title>SMB AI Partners | Grow Beyond Your Loyalty Program</title>
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="SMB AI Partners helps small businesses in San Diego automate tasks, capture more leads, and increase customer loyalty with custom AI solutions and SMS marketing.">
-    <meta name="keywords" content="AI consulting, small business automation, SMS loyalty programs, AI for contractors, marketing automation, San Diego, restaurant loyalty program, retail loyalty">
-    
+    <meta name="description" content="SMB AI Partners helps San Diego small businesses running SenText loyalty programs grow further with website development, marketing, sales consulting, and AI education.">
+    <meta name="keywords" content="SenText, SMS loyalty program, small business website development, small business marketing, sales consulting, AI education, AI training for small business, San Diego, restaurant marketing, retail marketing, salon marketing">
+
     <!-- Open Graph Meta Tags for Social Sharing -->
-    <meta property="og:title" content="SMB AI Partners | Stop Juggling Tasks, Start Growing Your Business">
-    <meta property="og:description" content="We help small businesses automate tedious tasks, capture more leads, and focus on growth.">
+    <meta property="og:title" content="SMB AI Partners | Grow Beyond Your Loyalty Program">
+    <meta property="og:description" content="Websites, marketing, sales consulting, and AI education for small businesses that run on repeat customers.">
     <meta property="og:image" content="logo.png">
     <meta property="og:url" content="https://www.smbaipartners.com">
-
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXHVL92VX"></script>
@@ -22,16 +21,7 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-    
-      gtag('config', 'G-QXHVL92VX');
-    </script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QXHVL92VX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
       gtag('config', 'G-QXHVL92VX');
     </script>
 
@@ -49,11 +39,10 @@
       }
       initApollo();
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,10 +58,16 @@
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Poppins', sans-serif;
         }
-        .primary-blue { color: #2A4B8D; }
+        .primary-blue, .text-primary-blue { color: #2A4B8D; }
+        .hover\:text-primary-blue:hover { color: #2A4B8D; }
         .bg-primary-blue { background-color: #2A4B8D; }
         .hover\:bg-primary-blue-dark:hover { background-color: #213B70; }
         .border-primary-blue { border-color: #2A4B8D; }
+
+        /* Hero background */
+        .hero-bg {
+            background: linear-gradient(135deg, #1B2F5A 0%, #2A4B8D 55%, #3A6FBF 100%);
+        }
 
         /* Animation for scroll fade-in */
         .fade-in-section {
@@ -83,11 +78,6 @@
         .fade-in-section.is-visible {
             opacity: 1;
             transform: translateY(0);
-        }
-        
-        /* Text shadow for hero readability */
-        .hero-text-shadow {
-            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -101,24 +91,24 @@
                     <img src="logo.png" alt="SMB AI Partners Logo" class="h-20 w-auto">
                 </a>
                 <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#solutions" class="text-gray-600 hover:text-primary-blue">Solutions</a>
-                    <a href="PDF Aloud Tool.html" class="text-gray-600 hover:text-primary-blue">PDF Aloud Tool</a>
-                    <a href="blog.html" class="text-primary-blue font-bold">Blog</a>
+                    <a href="#services" class="text-gray-600 hover:text-primary-blue">Services</a>
+                    <a href="#how" class="text-gray-600 hover:text-primary-blue">How It Works</a>
+                    <a href="blog.html" class="text-gray-600 hover:text-primary-blue">Blog</a>
                     <a href="#about" class="text-gray-600 hover:text-primary-blue">About</a>
                 </nav>
                 <a href="#contact" class="hidden md:inline-block bg-primary-blue text-white font-bold py-2 px-5 rounded-lg shadow-md hover:bg-primary-blue-dark">
                     Schedule a Call
                 </a>
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                <button id="mobile-menu-button" class="md:hidden text-gray-700" aria-label="Open menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden">
-            <a href="#solutions" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">Solutions</a>
-            <a href="PDF Aloud Tool.html" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">PDF Aloud Tool</a>
+            <a href="#services" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">Services</a>
+            <a href="#how" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">How It Works</a>
             <a href="blog.html" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">Blog</a>
             <a href="#about" class="block py-2 px-6 text-sm text-gray-700 hover:bg-gray-200">About</a>
             <div class="p-4">
@@ -128,19 +118,23 @@
             </div>
         </div>
     </header>
-    
+
     <main>
         <!-- Hero Section -->
-        <section class="relative min-h-[80vh] flex items-center text-white">
-            <div class="absolute inset-0 bg-black opacity-50"></div>
-            <img src="media/blog/2026-03-16-scout-estimator-vision.png" class="absolute inset-0 w-full h-full object-cover" alt="AI-driven architectural blueprint visualization">
-            <div class="relative container mx-auto px-6 text-left">
-                <div class="max-w-xl">
-                    <h1 class="text-4xl md:text-6xl font-bold leading-tight hero-text-shadow">Stop Guessing. Start Building.</h1>
-                    <p class="mt-4 text-lg md:text-xl text-gray-200 hero-text-shadow">We provide AI-native construction estimating and workflow orchestration for high-growth contractors.</p>
-                    <a href="#contact" class="mt-8 inline-block bg-primary-blue text-white font-bold text-lg py-4 px-10 rounded-lg shadow-xl hover:bg-primary-blue-dark transition-all transform hover:scale-105">
-                        Book Your Construction Workflow Audit
-                    </a>
+        <section class="hero-bg min-h-[75vh] flex items-center text-white">
+            <div class="container mx-auto px-6 py-20">
+                <div class="max-w-2xl">
+                    <p class="text-sm font-bold tracking-widest uppercase text-cyan-300">For SenText loyalty program businesses</p>
+                    <h1 class="mt-4 text-4xl md:text-6xl font-bold leading-tight">Your Customers Are Coming Back. Now Grow Everything Else.</h1>
+                    <p class="mt-6 text-lg md:text-xl text-blue-100">SenText brings your regulars back through the door. SMB AI Partners builds the rest of your growth engine: a website that converts, marketing that fills the funnel, a sales process that closes, and a team that knows how to use AI.</p>
+                    <div class="mt-10 flex flex-wrap gap-4">
+                        <a href="#contact" class="inline-block bg-white text-primary-blue font-bold text-lg py-4 px-8 rounded-lg shadow-xl hover:bg-blue-50 transition-all transform hover:scale-105">
+                            Book a Free Growth Call
+                        </a>
+                        <a href="#services" class="inline-block border-2 border-white text-white font-bold text-lg py-4 px-8 rounded-lg hover:bg-white/10 transition-all">
+                            See Add-On Services
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -148,94 +142,96 @@
         <!-- Problem Section -->
         <section id="problem" class="py-20 md:py-28 fade-in-section">
             <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-                    <div class="text-center md:text-left">
-                        <h2 class="text-3xl md:text-4xl font-bold primary-blue">Still Doing Takeoffs in Excel?</h2>
-                        <p class="mt-4 text-lg text-gray-600">The biggest bottleneck in your growth isn't a lack of work—it's the time lost between a floor plan and a proposal. If your estimating process involves a ruler, a calculator, and long nights at the kitchen table, you're capped.</p>
-                        <p class="mt-4 text-lg text-gray-600">Artificial Intelligence has moved beyond chat. For modern General Contractors and Trades, AI-native orchestration is the new standard for winning bids and protecting margins.</p>
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold primary-blue">A Loyalty Program Is One Piece of the Puzzle</h2>
+                    <p class="mt-4 text-lg text-gray-600">Texts bring customers back, but they don't fix an outdated website, find brand-new customers, or turn inquiries into sales. Most small business owners end up juggling five vendors who never talk to each other.</p>
+                    <p class="mt-4 text-lg text-gray-600">We already know your business from setting up your loyalty program. Adding services with us means one partner, one plan, and every piece working together.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20 md:py-28 bg-gray-800 text-white fade-in-section">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold">Add-On Services</h2>
+                <p class="mt-4 text-lg max-w-3xl mx-auto text-gray-300">Pick what your business needs next. Every service is built to work with the customer list your SenText program is already growing.</p>
+                <div class="grid md:grid-cols-2 gap-8 mt-16 text-left">
+                    <!-- Website Development -->
+                    <div class="bg-gray-700 p-8 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-cyan-400">Website Development</h3>
+                        <p class="mt-2 text-gray-300">A fast, mobile-friendly website that turns visitors into customers and loyalty members.</p>
+                        <ul class="mt-4 space-y-2 text-gray-300">
+                            <li class="flex items-start"><span class="text-cyan-400 mr-2">✓</span> Modern design that works on every phone</li>
+                            <li class="flex items-start"><span class="text-cyan-400 mr-2">✓</span> Online loyalty sign-up, menus, booking &amp; ordering</li>
+                            <li class="flex items-start"><span class="text-cyan-400 mr-2">✓</span> Local SEO so nearby customers find you</li>
+                        </ul>
                     </div>
-                    <div>
-                        <img src="media/blog/2026-03-16-ai-for-builders.png" class="rounded-lg shadow-2xl" alt="Contractor using AI tablet on site">
+                    <!-- Marketing -->
+                    <div class="bg-gray-700 p-8 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-green-400">Marketing</h3>
+                        <p class="mt-2 text-gray-300">SenText keeps customers coming back. Marketing brings in new ones to join the program.</p>
+                        <ul class="mt-4 space-y-2 text-gray-300">
+                            <li class="flex items-start"><span class="text-green-400 mr-2">✓</span> Google Business Profile &amp; review growth</li>
+                            <li class="flex items-start"><span class="text-green-400 mr-2">✓</span> Social media content &amp; local ads</li>
+                            <li class="flex items-start"><span class="text-green-400 mr-2">✓</span> Promotions planned alongside your text campaigns</li>
+                        </ul>
+                    </div>
+                    <!-- Sales Consulting -->
+                    <div class="bg-gray-700 p-8 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-green-400">Sales Consulting</h3>
+                        <p class="mt-2 text-gray-300">Turn more inquiries, walk-ins, and repeat visits into bigger tickets and booked revenue.</p>
+                        <ul class="mt-4 space-y-2 text-gray-300">
+                            <li class="flex items-start"><span class="text-green-400 mr-2">✓</span> Offers, pricing &amp; upsell strategy</li>
+                            <li class="flex items-start"><span class="text-green-400 mr-2">✓</span> Staff scripts &amp; lead follow-up process</li>
+                            <li class="flex items-start"><span class="text-green-400 mr-2">✓</span> Simple CRM setup to track every customer</li>
+                        </ul>
+                    </div>
+                    <!-- AI Education -->
+                    <div class="bg-gray-700 p-8 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-cyan-400">AI Education</h3>
+                        <p class="mt-2 text-gray-300">Hands-on training so you and your team save hours every week with everyday AI tools.</p>
+                        <ul class="mt-4 space-y-2 text-gray-300">
+                            <li class="flex items-start"><span class="text-cyan-400 mr-2">✓</span> Plain-English workshops for owners &amp; staff</li>
+                            <li class="flex items-start"><span class="text-cyan-400 mr-2">✓</span> AI for writing posts, emails &amp; text offers</li>
+                            <li class="flex items-start"><span class="text-cyan-400 mr-2">✓</span> Automating the busywork that eats your day</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Solutions Section -->
-        <section id="solutions" class="py-20 md:py-28 bg-gray-800 text-white fade-in-section">
+        <!-- How It Works -->
+        <section id="how" class="py-20 md:py-28 bg-white fade-in-section">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold">The Scout Estimator Pipeline</h2>
-                <p class="mt-4 text-lg max-w-3xl mx-auto text-gray-300">From blueprint to professional proposal in minutes, not days.</p>
-                <div class="grid md:grid-cols-3 gap-8 mt-16 text-left">
-                    <!-- Automated Takeoffs -->
-                    <div class="bg-gray-700 p-8 rounded-lg shadow-lg">
-                        <h3 class="text-xl font-bold text-cyan-400">Automated Takeoffs</h3>
-                        <p class="mt-2 text-gray-300">Our proprietary engine extracts quantities from your blueprints in minutes with 98% accuracy.</p>
-                        <ul class="mt-4 space-y-2 text-gray-300">
-                            <li class="flex items-start"><span class="text-cyan-400 mr-2">✓</span> Linear & Area Extraction</li>
-                            <li class="flex items-start"><span class="text-cyan-400 mr-2">✓</span> Automated Fixture Counting</li>
-                            <li class="flex items-start"><span class="text-cyan-400 mr-2">✓</span> Scale & Legend Detection</li>
-                        </ul>
+                <h2 class="text-3xl md:text-4xl font-bold primary-blue">How It Works</h2>
+                <div class="grid md:grid-cols-3 gap-10 mt-14 text-left max-w-5xl mx-auto">
+                    <div>
+                        <div class="w-12 h-12 rounded-full bg-primary-blue text-white flex items-center justify-center text-xl font-bold">1</div>
+                        <h3 class="mt-4 text-xl font-bold text-gray-800">Launch Your Loyalty Program</h3>
+                        <p class="mt-2 text-gray-600">We set up SenText so your regulars start coming back on autopilot. Already running it? Start at step 2.</p>
                     </div>
-                    <!-- AI Proposals -->
-                    <div class="bg-gray-700 p-8 rounded-lg shadow-lg border-2 border-green-400">
-                        <h3 class="text-xl font-bold text-green-400">Winning Proposals</h3>
-                        <p class="mt-2 text-gray-300">Instant generation of branded, ROI-focused proposals mapped to your specific labor and material rates.</p>
-                        <ul class="mt-4 space-y-2 text-gray-300">
-                            <li class="flex items-start"><span class="text-green-400 mr-2">✓</span> "First-to-Table" Speed</li>
-                            <li class="flex items-start"><span class="text-green-400 mr-2">✓</span> Professional Branding</li>
-                            <li class="flex items-start"><span class="text-green-400 mr-2">✓</span> Margin Protection</li>
-                        </ul>
+                    <div>
+                        <div class="w-12 h-12 rounded-full bg-primary-blue text-white flex items-center justify-center text-xl font-bold">2</div>
+                        <h3 class="mt-4 text-xl font-bold text-gray-800">Free Growth Call</h3>
+                        <p class="mt-2 text-gray-600">We look at your website, marketing, sales process, and team to find the biggest opportunity.</p>
                     </div>
-                    <!-- Workflow Orchestration -->
-                    <div class="bg-gray-700 p-8 rounded-lg shadow-lg">
-                        <h3 class="text-xl font-bold text-cyan-400">Field Orchestration</h3>
-                        <p class="mt-2 text-gray-300">AI-native safety audits, voice-to-log site reporting, and real-time project velocity tracking.</p>
-                        <ul class="mt-4 space-y-2 text-gray-300">
-                            <li class="flex items-start"><span class="text-cyan-400 mr-2">✓</span> Voice-to-Insight Site Logs</li>
-                            <li class="flex items-start"><span class="text-cyan-400 mr-2">✓</span> Automated Safety Audits</li>
-                            <li class="flex items-start"><span class="text-cyan-400 mr-2">✓</span> CRM & Procore Integration</li>
-                        </ul>
+                    <div>
+                        <div class="w-12 h-12 rounded-full bg-primary-blue text-white flex items-center justify-center text-xl font-bold">3</div>
+                        <h3 class="mt-4 text-xl font-bold text-gray-800">Add What Fits</h3>
+                        <p class="mt-2 text-gray-600">Choose only the services you need. We build them to work with your loyalty program from day one.</p>
                     </div>
                 </div>
+                <p class="mt-14 text-gray-600">Don't have a loyalty program yet? <a href="https://loyaltyprogramguy.com" class="text-primary-blue font-bold hover:underline">Learn about SenText &rarr;</a></p>
             </div>
         </section>
 
         <!-- Guarantee Section -->
-        <section class="py-20 md:py-28 bg-white fade-in-section">
+        <section class="py-20 md:py-28 bg-gray-50 fade-in-section">
             <div class="container mx-auto px-6 text-center">
                 <div class="max-w-3xl mx-auto">
                     <h2 class="text-3xl md:text-4xl font-bold primary-blue">Our 3X ROI Guarantee</h2>
                     <p class="mt-4 text-lg text-gray-600">We are confident in our ability to deliver a significant return on your investment. Our promise is simple: If, after 12 months, your business hasn’t achieved a 3X return on investment, we will provide our full monthly services at no charge until that milestone is reached.</p>
                     <p class="mt-4 text-gray-500 text-sm">See our <a href="terms.html" class="underline hover:text-primary-blue">Terms page</a> for full details.</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- PDF Aloud Tool Promo -->
-        <section class="py-20 md:py-28 bg-gray-50 fade-in-section">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold primary-blue">Try Our Free Tool</h2>
-                <p class="mt-4 text-lg max-w-2xl mx-auto text-gray-600">We built PDF Aloud to show the power of AI. Upload any PDF and listen to it in a natural, human-like voice. It's free, and a perfect example of how we build simple tools that solve real problems.</p>
-                <a href="PDF Aloud Tool.html" class="mt-8 inline-block bg-primary-blue text-white font-bold text-lg py-4 px-10 rounded-lg shadow-xl hover:bg-primary-blue-dark transition-all transform hover:scale-105">
-                    Launch PDF Aloud
-                </a>
-            </div>
-        </section>
-        
-        <!-- Testimonial Section -->
-        <section class="py-20 md:py-28 bg-white fade-in-section">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-3 gap-12 items-center">
-                    <div class="md:col-span-1 flex justify-center">
-                        <img src="troy.jpeg" alt="Headshot of Troy France" class="w-48 h-48 rounded-full object-cover shadow-2xl border-4 border-primary-blue">
-                    </div>
-                    <div class="md:col-span-2 text-center md:text-left">
-                        <blockquote class="text-2xl italic text-gray-700">
-                            “Our biggest challenge was the feast or famine project flow. After meeting with SMB AI Partners, I was astounded by the simplicity of the tools. I couldn't believe that a tool could take something I would work on for an entire day and get it done within an hour!”
-                        </blockquote>
-                        <cite class="mt-4 block text-lg font-bold primary-blue not-italic">– Troy France, Owner, SoCoast Contracting</cite>
-                    </div>
                 </div>
             </div>
         </section>
@@ -249,8 +245,8 @@
                     </div>
                     <div class="order-1 md:order-2 text-center md:text-left">
                         <h2 class="text-3xl md:text-4xl font-bold primary-blue">Your Partner in Growth</h2>
-                        <p class="mt-4 text-lg text-gray-600">Hi, I'm Kevin Graham. I started SMB AI Partners because I believe the technology that helps big companies get ahead should be accessible to everyone.</p>
-                        <p class="mt-4 text-lg text-gray-600">My mission is simple: to be your local expert who translates complex tech into real-world results. I’m not a vendor; I’m a partner in your success.</p>
+                        <p class="mt-4 text-lg text-gray-600">Hi, I'm Kevin Graham. I help local restaurants, retail shops, and salons across San Diego get more repeat customers as an authorized SenText agent.</p>
+                        <p class="mt-4 text-lg text-gray-600">I started SMB AI Partners because a loyalty program works best when the rest of the business is set up to grow too. You work directly with me, not a call center. I'm not a vendor; I'm a partner in your success.</p>
                     </div>
                 </div>
             </div>
@@ -261,23 +257,23 @@
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-3xl md:text-4xl font-bold primary-blue">From the Blog</h2>
                 <div class="mt-12 max-w-lg mx-auto bg-gray-50 rounded-lg shadow-lg p-8 text-left hover:shadow-2xl transition-shadow">
-                    <p class="text-sm text-gray-500">LATEST POST</p>
-                    <h3 class="mt-2 text-2xl font-bold text-gray-800">The 2025 SMB AI Tax Credit Opportunity</h3>
-                    <p class="mt-4 text-gray-600">Learn how small businesses can use R&D credits, Section 179, and bonus depreciation to de-risk first AI investments before year-end 2025.</p>
-                    <a href="blog posts/smb-ai-tax-credit-opportunity.html" class="mt-6 inline-block text-primary-blue font-bold hover:underline">Read More &rarr;</a>
+                    <p class="text-sm text-gray-500">FEATURED POST</p>
+                    <h3 class="mt-2 text-2xl font-bold text-gray-800">How to Spot Real ROI From AI</h3>
+                    <p class="mt-4 text-gray-600">A 6-week playbook for small businesses that want results from AI, not hype.</p>
+                    <a href="blog posts/How to Spot Real ROI From AI: A 6-Week Playbook for Small Businesses.html" class="mt-6 inline-block text-primary-blue font-bold hover:underline">Read More &rarr;</a>
                 </div>
             </div>
         </section>
-        
+
         <!-- Calendly/Contact Section -->
         <section id="contact" class="py-20 md:py-28">
             <div class="container mx-auto px-6">
                  <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl grid md:grid-cols-2 gap-12 items-center">
                     <div class="text-center md:text-left">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Ready to See It in Action?</h2>
-                        <p class="mt-4 text-lg text-gray-600">Schedule a free, no-obligation 15-minute demo. I'll show you exactly how AI can start generating returns for your business in days.</p>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">What Should Your Business Add Next?</h2>
+                        <p class="mt-4 text-lg text-gray-600">Book a free, no-obligation 15-minute call. We'll look at where you are today and map out which services will grow your business fastest.</p>
                         <div class="mt-8">
-                            <a class="bg-primary-blue text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-primary-blue-dark transition shadow-lg transform hover:scale-105 inline-block" href="https://calendly.com/smbaipartners">Book Your Free Demo</a>
+                            <a class="bg-primary-blue text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-primary-blue-dark transition shadow-lg transform hover:scale-105 inline-block" href="https://calendly.com/smbaipartners">Book Your Free Growth Call</a>
                         </div>
                     </div>
                     <div class="rounded-lg overflow-hidden border">
@@ -289,13 +285,15 @@
         </section>
 
     </main>
-    
+
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-10">
         <div class="container mx-auto px-6 text-center text-gray-400">
-            <p>&copy; 2025 SMB AI Partners. All Rights Reserved.</p>
+            <p>&copy; 2026 SMB AI Partners. All Rights Reserved.</p>
             <div class="mt-2 text-sm">
                 <a href="terms.html" class="hover:text-white">Terms</a>
+                <span class="mx-2">|</span>
+                <a href="https://loyaltyprogramguy.com" class="hover:text-white">Loyalty Programs</a>
                 <span class="mx-2">|</span>
                 <a href="#" class="hover:text-white">Privacy Policy</a>
             </div>
