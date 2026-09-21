@@ -27,15 +27,20 @@
         .prose a { color: #2563EB; text-decoration: underline; }
         .prose a:hover { color: #1D4ED8; }
         .prose blockquote { border-left-color: #2A4B8D; }
+    
+        .skip-link { position: absolute; left: -9999px; top: 0; background: #2A4B8D; color: #fff; padding: 0.75rem 1rem; z-index: 100; }
+        .skip-link:focus { left: 0; }
+        a:focus-visible, button:focus-visible { outline: 3px solid #2563EB; outline-offset: 2px; }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
+    <a href="#main" class="skip-link">Skip to main content</a>
 
     <!-- Header -->
     <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="../index.html"><img src="../logo.png" alt="SMB AI Partners Logo" class="h-20 w-auto"></a>
-            <nav class="hidden md:flex items-center space-x-8">
+            <nav aria-label="Main" class="hidden md:flex items-center space-x-8">
                 <a href="../index.html#solutions" class="text-gray-600 hover:text-primary-blue">Solutions</a>
                 <a href="../PDF Aloud Tool.html" class="text-gray-600 hover:text-primary-blue">PDF Aloud Tool</a>
                 <a href="../blog.html" class="text-primary-blue font-bold">Blog</a>
@@ -46,7 +51,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow py-16 md:py-24">
+    <main id="main" class="flex-grow py-16 md:py-24">
         <div class="container mx-auto px-6">
             <article class="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-lg prose lg:prose-xl">
                 <!-- Post Header -->
@@ -123,11 +128,14 @@
         <div class="container mx-auto px-6 text-center text-gray-400">
             <p>&copy; 2025 SMB AI Partners. All Rights Reserved.</p>
             <div class="mt-2 text-sm">
-                <a href="../terms.html" class="hover:text-white">Terms</a> | <a href="#" class="hover:text-white">Privacy Policy</a>
+                <a href="../terms.html" class="hover:text-white">Terms</a> | <a href="../privacy.html" class="hover:text-white">Privacy Policy</a>
+                <span class="mx-2">|</span>
+                <button type="button" data-privacy-choices class="hover:text-white underline">Your Privacy Choices</button>
             </div>
         </div>
     </footer>
 
+    <script src="../consent.js"></script>
 </body>
 </html>
 

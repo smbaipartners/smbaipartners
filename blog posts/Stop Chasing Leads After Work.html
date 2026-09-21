@@ -40,9 +40,14 @@
             line-height: 1.75;
             margin-bottom: 1.5rem;
         }
+    
+        .skip-link { position: absolute; left: -9999px; top: 0; background: #2A4B8D; color: #fff; padding: 0.75rem 1rem; z-index: 100; }
+        .skip-link:focus { left: 0; }
+        a:focus-visible, button:focus-visible { outline: 3px solid #2563EB; outline-offset: 2px; }
     </style>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
     <!-- Header / Navigation -->
     <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
@@ -54,7 +59,7 @@
                 </a>
 
                 <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-8">
+                <nav aria-label="Main" class="hidden md:flex items-center space-x-8">
                     <a href="index.html#problem" class="text-gray-600 hover:text-primary-blue transition-colors">The Problem</a>
                     <a href="index.html#solutions" class="text-gray-600 hover:text-primary-blue transition-colors">Solutions</a>
                     <a href="blog.html" class="text-primary-blue font-bold">Blog</a>
@@ -69,7 +74,7 @@
         </div>
     </header>
 
-    <main>
+    <main id="main">
         <!-- Article -->
         <article class="py-20">
             <div class="container mx-auto px-6 max-w-3xl">
@@ -119,5 +124,6 @@
         </div>
     </footer>
 
+    <script src="../consent.js"></script>
 </body>
 </html>
